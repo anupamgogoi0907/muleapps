@@ -18,14 +18,8 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<spring:import resource="classpath:bean-config.xml" />
 	</spring:beans>
     <encryption:config name="JCE" doc:name="Encryption"/>
-    <encryption:config name="PGP" defaultEncrypter="PGP_ENCRYPTER" doc:name="Encryption">
-        <encryption:pgp-encrypter-config publicKeyRingFileName="/Users/agogoi/.gnupg/pubring.gpg" secretKeyRingFileName="/Users/agogoi/.gnupg/secring.gpg" secretAliasId="4085903932711382909" secretPassphrase="1234" principal="mulesoft"/>
-    </encryption:config>
-    <encryption:config name="PGP_DSAELG" doc:name="Encryption" defaultEncrypter="PGP_ENCRYPTER">
-        <encryption:pgp-encrypter-config publicKeyRingFileName="/Users/agogoi/.gnupg/pubring.gpg" secretKeyRingFileName="/Users/agogoi/.gnupg/secring.gpg" secretAliasId="4085903932711382909" secretPassphrase="1234" principal="dsaelg"/>
-    </encryption:config>
     <encryption:config name="JCE_Keystore" doc:name="Encryption">
-        <encryption:jce-encrypter-config key="ackey" keyPassword="123456" keystorePassword="123456" keystorePath="/Users/agogoi/keystore/aes_ackeystore.jck" />
+        <encryption:jce-encrypter-config key="ackey" keyPassword="ackeypass" keystorePassword="acstorepass" keystorePath="/home/anupam/git/muleapps/springbeanexample/src/main/resources/keystore/aes-ackeystore.jck" />
     </encryption:config>
 	<flow name="JCE_Encryption_Attribute">
 		<http:listener config-ref="HTTP_8081" path="/jce/*"
@@ -42,7 +36,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
         <invoke object-ref="personBean" method="sayHello" doc:name="Invoke"/>
 	</flow>
 	<flow name="JCE_Encryption_Keystore">
-        <http:listener config-ref="HTTP_8081" path="/" doc:name="HTTP"/>
+        <http:listener config-ref="HTTP_8081" path="/key/*" doc:name="HTTP"/>
         <object-to-string-transformer doc:name="Object to String"/>
         <encryption:encrypt config-ref="JCE_Keystore" doc:name="Encrypt"/>
         <logger message="#[payload]" level="INFO" doc:name="Encrypted payload"/>
