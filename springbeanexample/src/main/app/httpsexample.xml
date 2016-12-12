@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd">
+    <http:listener-config name="HTTPS_8082_OneWaySSL" host="localhost" port="8082" doc:name="HTTP Listener Configuration" protocol="HTTPS">
+        <tls:context>
+            <tls:key-store type="jks" path="keystore/mykeystore.jks" alias="mule" keyPassword="123456" password="123456"/>
+        </tls:context>
+    </http:listener-config>
+    <http:request-config name="HTTPS_Request_Configuration" protocol="HTTPS" host="localhost" port="8082" doc:name="HTTP Request Configuration">
+        <tls:context>
+            <tls:trust-store path="keystore/mykeystore.jks" password="123456" type="jks" insecure="true"/>
+        </tls:context>
+    </http:request-config>
+    <http:listener-config name="HTTP_8083" host="localhost" port="8083" doc:name="HTTP Listener Configuration"/>
+    <flow name="HTTPS_Client_OneWaySSL">
+        <http:listener config-ref="HTTP_8081" path="/app/*" doc:name="HTTP"/>
+        <logger level="INFO" doc:name="Logger"/>
+        <http:request config-ref="HTTPS_Request_Configuration" path="/server/*" method="GET" doc:name="HTTP"/>
+    </flow>
+    <flow name="HTTPS_Server_OneWaySSL">
+        <http:listener config-ref="HTTPS_8082_OneWaySSL" path="/server/*" doc:name="HTTPS"/>
+        <logger level="INFO" doc:name="Logger"/>
+    </flow>
+</mule>
