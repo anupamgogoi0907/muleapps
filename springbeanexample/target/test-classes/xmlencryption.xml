@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:encryption="http://www.mulesoft.org/schema/mule/encryption"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd">
+	<encryption:config name="XML_Encrypter"
+		defaultEncrypter="XML_ENCRYPTER" doc:name="Encryption">
+		<encryption:xml-encrypter-config 
+			   />
+	</encryption:config>
+	<flow name="XML_Encryption_Attribute">
+		<http:listener config-ref="HTTP_8081" path="/xml/*"
+			doc:name="HTTP" />
+        <object-to-string-transformer doc:name="Object to String"/>
+		<encryption:encrypt config-ref="XML_Encrypter"
+			doc:name="Encrypt" using="XML_ENCRYPTER" >
+			<encryption:xml-encrypter algorithm="AES_128" key="${encrypt.key}" keyPassword="1234" xpath="book/name"/>
+		</encryption:encrypt>
+		<logger message="#[payload]" level="INFO" doc:name="Encrypted payload" />
+		<encryption:decrypt config-ref="XML_Encrypter"
+			doc:name="Decrypt" using="XML_ENCRYPTER">
+			<encryption:xml-encrypter key="${encrypt.key}"
+				keyPassword="1234" algorithm="AES_128" xpath="book/name"/>
+		</encryption:decrypt>
+		<logger message="#[payload]" level="INFO" doc:name="Decrypted payload" />
+	</flow>
+</mule>
