@@ -12,14 +12,14 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 http://www.mulesoft.org/schema/mule/encryption http://www.mulesoft.org/schema/mule/encryption/current/mule-encryption.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
-	<http:listener-config name="HTTP_8081" host="0.0.0.0"
+	<http:listener-config name="HTTP_8081" host="localhost"
 		port="8081" doc:name="HTTP Listener Configuration" />
 	<spring:beans>
 		<spring:import resource="classpath:bean-config.xml" />
 	</spring:beans>
     <encryption:config name="JCE" doc:name="Encryption"/>
     <encryption:config name="JCE_Keystore" doc:name="Encryption">
-        <encryption:jce-encrypter-config key="ackey" keyPassword="ackeypass" keystorePassword="acstorepass" keystorePath="/home/anupam/git/muleapps/springbeanexample/src/main/resources/keystore/aes-ackeystore.jck" />
+        <encryption:jce-encrypter-config key="ackey" keyPassword="ackeypass" keystorePassword="acstorepass" keystorePath="keystore/aes-ackeystore.jck" />
     </encryption:config>
 	<flow name="JCE_Encryption_Attribute">
 		<http:listener config-ref="HTTP_8081" path="/jce/*"
