@@ -2,4 +2,5 @@
 <mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.8.2.ee" schemaVersion="5.3.0.0">
     <name>vault-example</name>
     <description></description>
+    <muleExtension name="Secure Property Placeholder" qualifier="org.mule.tooling.ui.contribution.secure-property-placeholder.3.7.3"/>
 </mule-project>
