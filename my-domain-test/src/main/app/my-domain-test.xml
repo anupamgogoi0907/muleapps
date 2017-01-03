@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context" xmlns:apikit="http://www.mulesoft.org/schema/mule/apikit"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/apikit http://www.mulesoft.org/schema/mule/apikit/current/mule-apikit.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd">
+	
+	<!--  Import the flows as spring beans -->
+	<spring:beans>
+		<spring:import resource="classpath:my-common-flows.xml" />
+		<spring:import resource="classpath:connections.xml" />
+	</spring:beans>
+	<apikit:config name="Router" raml="american.raml"
+		consoleEnabled="true" consolePath="console" doc:name="Router">
+		<apikit:flow-mapping resource="/flights" action="get"
+			flow-ref="getFlights-flow" />
+	</apikit:config>
+    <context:property-placeholder location="classpath:init-DEV.properties"/>
+	<flow name="demo-flow">
+		<http:listener config-ref="HTTP_Common_8081" path="/app/*"
+			doc:name="HTTP" />
+		<apikit:router config-ref="Router" doc:name="APIkit Router" />
+		<exception-strategy ref="common-exception-handling"
+			doc:name="Reference Exception Strategy" />
+
+	</flow>
+	<flow name="getFlights-flow">
+		<set-payload doc:name="Set Payload" value="${flights.data}"/>
+	</flow>
+</mule>
