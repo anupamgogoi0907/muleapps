@@ -137,7 +137,7 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Common flows -->
+		<!-- Use shared resources. -->
 		<dependency>
 			<groupId>anupam.gogoi</groupId>
 			<artifactId>my-common-flows</artifactId>

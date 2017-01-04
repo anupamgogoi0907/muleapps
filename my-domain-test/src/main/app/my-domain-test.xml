@@ -17,12 +17,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 		<spring:import resource="classpath:my-common-flows.xml" />
 		<spring:import resource="classpath:connections.xml" />
 	</spring:beans>
+	
+	<context:property-placeholder location="classpath:init-DEV.properties"/>
+	
 	<apikit:config name="Router" raml="american.raml"
 		consoleEnabled="true" consolePath="console" doc:name="Router">
 		<apikit:flow-mapping resource="/flights" action="get"
 			flow-ref="getFlights-flow" />
 	</apikit:config>
-    <context:property-placeholder location="classpath:init-DEV.properties"/>
+    
 	<flow name="demo-flow">
 		<http:listener config-ref="HTTP_Common_8081" path="/app/*"
 			doc:name="HTTP" />
