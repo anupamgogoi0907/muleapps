@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
 http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
-    <http:listener-config name="HTTP_Listener_8081" host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration"/>
+   
     <flow name="readFile">
         <file:inbound-endpoint path="/Users/agogoi/git/muleapps/appdev-american-ws/src/main/resources/csv" responseTimeout="10000" metadata:id="76d3cdb7-4099-4b32-a578-cde3598c1523" doc:name="File"/>
         <dw:transform-message metadata:id="4a8fef5a-5423-4130-89ff-94c1225db9b5" doc:name="Transform Message">

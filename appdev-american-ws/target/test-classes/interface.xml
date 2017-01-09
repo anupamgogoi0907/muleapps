@@ -12,18 +12,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
 http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
-	<http:listener-config name="HTTP_Listener_8082"
-		host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration" />
-	<spring:beans>
-		<spring:bean id="DerbyDB" name="DerbyDB"
-			class="org.enhydra.jdbc.standard.StandardDataSource">
-			<spring:property name="driverName"
-				value="org.apache.derby.jdbc.ClientDriver" />
-			<spring:property name="url" value="${db.uri}" />
-		</spring:bean>
-	</spring:beans>
-	<db:derby-config name="Derby_Configuration"
-		dataSource-ref="DerbyDB" doc:name="Derby Configuration" />
+	
 	<apikit:config name="american-config" raml="american.raml"
 		consoleEnabled="false" doc:name="Router">
 		<apikit:flow-mapping resource="/flights" action="get"
@@ -31,8 +20,6 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 		<apikit:flow-mapping resource="/flights/{ID}"
 			action="get" flow-ref="getFlightsByIDFlow" />
 	</apikit:config>
-	<context:property-placeholder location="classpath:american-${env}.properties" />
-    <db:mysql-config name="MySQL_Configuration" host="${db.host}" port="${db.port}" user="${db.user}" password="${db.password}" database="${db.database}" doc:name="MySQL Configuration"/>
 	<flow name="american-main">
 		<http:listener config-ref="HTTP_Listener_8082" path="/api/*"
 			doc:name="HTTP" />
