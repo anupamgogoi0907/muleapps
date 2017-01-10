@@ -171,6 +171,12 @@
             <version>${mule.version}</version>
             <scope>provided</scope>
         </dependency>
+    
+    <dependency>
+            <groupId>com.anupam</groupId>
+            <artifactId>rest-connector</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

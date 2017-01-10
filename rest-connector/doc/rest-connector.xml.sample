@@ -1,0 +1,3 @@
+<!-- BEGIN_INCLUDE(rest:greet) -->
+    <rest:greet config-ref="" friend="#[map-payload:friend]" />
+<!-- END_INCLUDE(rest:greet) -->

@@ -2,4 +2,5 @@
 <mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.8.2.ee" schemaVersion="5.3.0.0">
     <name>appdev-american-ws</name>
     <description></description>
+    <muleExtension name="WordPress" qualifier="org.mule.tooling.ui.contribution.rest.3.5.0"/>
 </mule-project>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/rest" prefix="rest">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="WordPress" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/rest/abstractRestConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="WordPress: Configuration" description="Global Configuration configuration information." icon="icons/theme.classic/rest-connector-small.png" localId="config" image="icons/theme.classic/rest-connector-large.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/rest/parentConfig" connectivityTesting="off" metaData="static" metaDataKeyDisplay="DISPLAY_NAME" supportsUserDefinedMetaData="false">
+    <attribute-category caption="General" description="Rest configuration properties.">
+      <group id="restGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <string name="site" caption="Site" description="Please enter the blog url without the prefix http:// or https://." supportsExpressions="false" required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractrestconnectorgeneric" description="Interact with Rest." icon="icons/theme.classic/rest-connector-small.png" localId="abstractRestConnectorGeneric" image="icons/theme.classic/rest-connector-large.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractRestConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/rest/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.rest" caption="WordPress" description="" icon="icons/theme.classic/rest-connector-small.png" localId="rest-connector" image="icons/theme.classic/rest-connector-large.png" extends="http://www.mulesoft.org/schema/mule/rest/abstractRestConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="restConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Rest operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/rest/abstractRestConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/rest/get-posts" modeLabel="Get posts"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" caption="Get Posts" icon="icons/theme.classic/rest-connector-small.png" localId="get-posts" image="icons/theme.classic/rest-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/rest/abstractRestConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="field" caption="Field" description="Enter coma separated parameters.Acceptable parameters are: ID,title,URL." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>
