@@ -1,4 +1,3 @@
-import org.mule.api.annotations.display.Summary;
 import org.springframework.web.client.RestTemplate;
 
 public class Test {

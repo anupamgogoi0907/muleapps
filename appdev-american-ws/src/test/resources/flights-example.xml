@@ -1,0 +1,39 @@
+<ns2:listAllFlightsResponse xmlns:ns2="http://soap.training.mulesoft.com/">
+    <return airlineName="United">
+        <code>A1B2C3</code><departureDate>2015/10/20</departureDate>
+        <destination>SFO</destination><emptySeats>40</emptySeats>
+        <origin>MUA</origin>
+        <planeType>Boing 737</planeType>
+        <price>400.0</price>
+    </return>
+    <return airlineName="Delta">
+        <code>A1B2C4</code>
+        <departureDate>2015/10/21</departureDate><destination>LAX</destination><emptySeats>10</emptySeats>
+        <origin>MUA</origin>
+        <planeType>Boing 737</planeType>
+        <price>199.99</price>
+    </return>
+    <return airlineName="Delta">
+        <code>AFFFC5</code><departureDate>2015/10/21</departureDate><destination>PDX</destination>
+        <emptySeats>30</emptySeats>
+        <origin>MUA</origin>
+        <planeType>Boing 777</planeType>
+        <price>283.0</price>
+    </return>
+    <return airlineName="Delta">
+        <code>AFFFC4</code>
+        <departureDate>2015/10/20</departureDate>
+        <destination>PDX</destination><emptySeats>0</emptySeats>
+        <origin>MUA</origin>
+        <planeType>Boing 777</planeType>
+        <price>283.0</price>
+    </return>
+    <return airlineName="Delta">
+        <code>AFFFC3</code>
+        <departureDate>2015/10/20</departureDate>
+        <destination>PDX</destination><emptySeats>23</emptySeats>
+        <origin>MUA</origin>
+        <planeType>Boing 777</planeType>
+        <price>283.0</price>
+    </return>
+</ns2:listAllFlightsResponse>

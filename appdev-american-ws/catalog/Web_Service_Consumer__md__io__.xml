@@ -1,19 +1,57 @@
 <metadata__cache__entry>
   <version>5.2.0.0</version>
-  <connectorName>Rest__Configuration</connectorName>
+  <connectorName>Web_Service_Consumer</connectorName>
   <metadataIo class="tree-map">
     <entry>
-      <string>http://www.mulesoft.org/schema/mule/rest/get-accounts</string>
+      <string>findFlight</string>
       <map>
         <entry>
           <string>__default__</string>
           <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
+            <input class="org.mule.common.metadata.DefaultMetaData">
+              <payload class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
+                <connectorName>Web_Service_Consumer</connectorName>
+                <typeId>findFlight</typeId>
+                <category>DEFAULT</category>
+              </payload>
+              <properties>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>INBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+              </properties>
+            </input>
             <output class="org.mule.common.metadata.DefaultMetaData">
-              <payload class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
-                <dataType>STRING</dataType>
-                <metaDataModelPropertiesManager>
-                  <properties/>
-                </metaDataModelPropertiesManager>
+              <payload class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
+                <connectorName>Web_Service_Consumer</connectorName>
+                <typeId>findFlightResponse</typeId>
+                <category>DEFAULT</category>
               </payload>
               <properties>
                 <entry>
@@ -53,17 +91,16 @@
       </map>
     </entry>
     <entry>
-      <string>http://www.mulesoft.org/schema/mule/rest/get-posts</string>
+      <string>listAllFlights</string>
       <map>
         <entry>
           <string>__default__</string>
           <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
-            <output class="org.mule.common.metadata.DefaultMetaData">
-              <payload class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
-                <dataType>STRING</dataType>
-                <metaDataModelPropertiesManager>
-                  <properties/>
-                </metaDataModelPropertiesManager>
+            <input class="org.mule.common.metadata.DefaultMetaData">
+              <payload class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
+                <connectorName>Web_Service_Consumer</connectorName>
+                <typeId>listAllFlights</typeId>
+                <category>DEFAULT</category>
               </payload>
               <properties>
                 <entry>
@@ -97,23 +134,12 @@
                   </org.mule.common.metadata.MetaDataProperties>
                 </entry>
               </properties>
-            </output>
-          </org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
-        </entry>
-      </map>
-    </entry>
-    <entry>
-      <string>http://www.mulesoft.org/schema/mule/rest/greet</string>
-      <map>
-        <entry>
-          <string>__default__</string>
-          <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
+            </input>
             <output class="org.mule.common.metadata.DefaultMetaData">
-              <payload class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
-                <dataType>STRING</dataType>
-                <metaDataModelPropertiesManager>
-                  <properties/>
-                </metaDataModelPropertiesManager>
+              <payload class="org.mule.tooling.metadata.api.TypeRefMetaDataModel">
+                <connectorName>Web_Service_Consumer</connectorName>
+                <typeId>listAllFlightsResponse</typeId>
+                <category>DEFAULT</category>
               </payload>
               <properties>
                 <entry>

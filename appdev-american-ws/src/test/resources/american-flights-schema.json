@@ -1,0 +1,55 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema",
+	"type": "object",
+	"properties": {
+		"flights": {
+			"description": "An array that contains all the flights",
+			"type": "array",
+			"items": [{
+				"type": "object",
+				"properties": {
+					"ID": {
+						"description": "The flight ID",
+						"type": "integer"
+					},
+                    "code": {
+						"description": "The flight code",
+						"type": "string"
+					},
+					"price": {
+						"description": "The flight price",
+						"type": "number"
+					},
+					"departureDate": {
+						"description": "The flight departure date",
+						"type": "string"
+					},
+					"origin": {
+						"description": "The three letter airport code for the airport of origination",
+						"type": "string"
+					},
+					"destination": {
+						"description": "The three letter airport code for the airport of destination",
+						"type": "string"
+					},
+					"emptySeats": {
+						"description": "The number of available seats",
+						"type": "integer"
+					},
+					"plane": {
+						"description": "The plane specs",
+						"type": "object",
+						"properties": {
+							"type": {
+								"type": "string"
+							},
+							"totalSeats": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}]
+		}
+	}
+}

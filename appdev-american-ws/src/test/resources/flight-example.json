@@ -1,0 +1,11 @@
+{
+  "airline": "United",
+  "flightCode": "ER38sd",
+  "fromAirportCode": "LAX",
+  "toAirportCode": "SFO",
+  "departureDate": "May 21, 2016",
+  "emptySeats": 0,
+  "totalSeats": 200,
+  "price": 199,
+  "planeType": "Boeing 737"
+}

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.8.2"
+<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:db="http://www.mulesoft.org/schema/mule/db"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-current.xsd
-	http://www.mulesoft.org/schema/mule/core 
-	http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-	http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
-	http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd">
 
 
 	<context:property-placeholder location="classpath:american-${env}.properties" />
@@ -32,5 +31,12 @@
 	<db:mysql-config name="MySQL_Configuration" host="${db.host}"
 		port="${db.port}" user="${db.user}" password="${db.password}"
 		database="${db.database}" doc:name="MySQL Configuration" />
+    <http:request-config name="United_HTTP_Request_COnfiguration" protocol="HTTPS" host="mocksvc.mulesoft.com" port="443" doc:name="HTTP Request Configuration" basePath="/mocks/23d99088-f728-414f-adb7-e94005c182f0">
+        <http:raml-api-configuration location="american.raml"/>
+    </http:request-config>
+    <http:request-config name="American_HTTP_Request_Configuration" protocol="HTTP" host="0.0.0.0" port="80" doc:name="HTTP Request Configuration">
+        <http:raml-api-configuration location="api.raml"/>
+    </http:request-config>
+    <ws:consumer-config name="Web_Service_Consumer" service="TicketServiceService" port="TicketServicePort" serviceAddress="http://training.cloudhub.io/essentials/delta" wsdlLocation="http://ilt.mulesoft-training.com/essentials/delta?wsdl" doc:name="Web Service Consumer"/>
 
 </mule>
