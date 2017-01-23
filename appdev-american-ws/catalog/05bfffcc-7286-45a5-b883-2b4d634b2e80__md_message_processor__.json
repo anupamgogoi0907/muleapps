@@ -8,7 +8,7 @@
     "outputMessageMetadata": {
         "messagePayload": {
             "connectorName": "#_custom_mule_metadata_type_#",
-            "typeId": "flights_json"
+            "typeId": "Flight_pojo"
         }
     },
     "id": "05bfffcc-7286-45a5-b883-2b4d634b2e80",

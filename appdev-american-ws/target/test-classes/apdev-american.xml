@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd">
+
+	<flow name="getFlightsFlow">
+		<db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[SELECT *
+FROM american]]></db:parameterized-query>
+		</db:select>
+		<dw:transform-message metadata:id="323bd289-3186-4850-a76e-05ee0412e72c"
+			doc:name="Transform Message">
+			<dw:input-payload doc:sample="sample_data/list_map.dwl" />
+			<dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+payload map ((payload01 , indexOfPayload01) -> {
+	ID: payload01.ID,
+	code: payload01.CODE1 ++ payload01.CODE2,
+	price: payload01.PRICE as :number,
+	departureDate: payload01.TAKEOFFDATE as :string,
+	origin: payload01.FROMAIRPORT,
+	destination: payload01.TOAIRPORT,
+	emptySeats: payload01.SEATSAVAILABLE as :number,
+	plane: {
+		type: payload01.PLANETYPE,
+		totalSeats: payload01.TOTALSEATS as :number
+	}
+})]]></dw:set-payload>
+		</dw:transform-message>
+	</flow>
+	<flow name="getFlightsByIDFlow">
+        <db:select config-ref="MySQL_Configuration" doc:name="Database">
+            <db:parameterized-query><![CDATA[SELECT *
+FROM american
+WHERE ID = #[message.inboundProperties.'http.uri.params'.ID]]]></db:parameterized-query>
+        </db:select>
+		<dw:transform-message metadata:id="323bd289-3186-4850-a76e-05ee0412e72c"
+			doc:name="Copy_of_Transform Message">
+			<dw:input-payload doc:sample="sample_data/list_map.dwl" />
+			<dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+payload map ((payload01 , indexOfPayload01) -> {
+	ID: payload01.ID,
+	code: payload01.CODE1 ++ payload01.CODE2,
+	price: payload01.PRICE as :number,
+	departureDate: payload01.TAKEOFFDATE as :string,
+	origin: payload01.FROMAIRPORT,
+	destination: payload01.TOAIRPORT,
+	emptySeats: payload01.SEATSAVAILABLE as :number,
+	plane: {
+		type: payload01.PLANETYPE,
+		totalSeats: payload01.TOTALSEATS as :number
+	}
+})]]></dw:set-payload>
+		</dw:transform-message>
+	</flow>
+	<flow name="postFlightFlow">
+		<set-payload
+			value="{&quot;message&quot;: &quot;Flight added (but not really)&quot;}"
+			doc:name="Set Payload" />
+	</flow>
+</mule>

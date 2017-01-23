@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.raml:raml-parser:0.8.17">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/raml/raml-parser/0.8.17/raml-parser-0.8.17.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/raml/raml-parser/0.8.17/raml-parser-0.8.17-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/raml/raml-parser/0.8.17/raml-parser-0.8.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

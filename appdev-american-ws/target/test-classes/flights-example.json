@@ -1,0 +1,24 @@
+[
+    {
+      "airline": "United",
+      "flightCode": "ER38sd",
+      "fromAirportCode": "LAX",
+      "toAirportCode": "SFO",
+      "departureDate": "May 21, 2016",
+      "emptySeats": 0,
+      "totalSeats": 200,
+      "price": 199,
+      "planeType": "Boeing 737"
+    },
+    {
+      "airline": "Delta",
+      "flightCode": "ER0945",
+      "fromAirportCode": "PDX",
+      "toAirportCode": "CLE",
+      "departureDate": "June 1, 2016",
+      "emptySeats": 24,
+      "totalSeats": 350,
+      "price": 450,
+      "planeType": "Boeing 747"
+    }
+] 

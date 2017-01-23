@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "type": "object",
+  "properties": {
+            "airline": {
+              "description": "The airline name",
+              "type": "string"
+            },
+            "flightCode": {
+              "description": "The flight code",
+              "type": "string"
+            },
+            "fromAirportCode": {
+              "description": "The three letter airport code for the airport of origination",
+              "type": "string"
+            },
+            "toAirportCode": {
+              "description": "The three letter airport code for the airport of destination",
+              "type": "string"
+            },
+            "departureDate": {
+              "description": "The flight departure date",
+              "type": "string"
+            },
+            "emptySeats": {
+              "description": "The number of available seats",
+              "type": "integer"
+            },
+            "totalSeats": {
+              "description": "The total number of seats",
+              "type": "integer"
+            },
+      		"price": {
+              "description": "The flight price",
+              "type": "integer"
+            },
+            "planeType": {
+              "description": "The plane type",
+              "type": "string"
+            }
+  }
+}
