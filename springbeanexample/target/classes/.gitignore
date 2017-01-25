@@ -1,9 +1,1 @@
-/EncryptionStrategy.xml
-/XmlEncryption.xml
-/bean-config.xml
-/com/
-/httpsexample.xml
-/keystore/
-/log4j2.xml
-/mule-app.properties
-/mule-deploy.properties
+/scatter-gather-example.xml
