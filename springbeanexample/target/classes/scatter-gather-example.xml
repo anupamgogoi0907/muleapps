@@ -33,7 +33,7 @@ payload map ((payload01 , indexOfPayload01) -> {
 	price: payload01.price,
 	product_name: payload01.productName,
 	vendor: payload01.vendor
-}) orderBy $.price groupBy $.vendor]]></dw:set-payload>
+}) orderBy $.price]]></dw:set-payload>
         </dw:transform-message>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
