@@ -16,6 +16,9 @@
     },
     "price": {
       "type": "number"
+    },
+    "vendor": {
+      "type": "string"
     }
   },
   "required": [
@@ -23,6 +26,7 @@
     "productName",
     "productType",
     "brand",
-    "price"
+    "price",
+    "vendor"
   ]
 }

@@ -31,8 +31,9 @@ flatten payload]]></dw:set-payload>
 ---
 payload map ((payload01 , indexOfPayload01) -> {
 	price: payload01.price,
-	product_name: payload01.productName
-}) orderBy $.price]]></dw:set-payload>
+	product_name: payload01.productName,
+	vendor: payload01.vendor
+}) orderBy $.price groupBy $.vendor]]></dw:set-payload>
         </dw:transform-message>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
@@ -55,7 +56,8 @@ payload map ((payload01 , indexOfPayload01) -> {
 	price: payload01.price,
 	productId: payload01.productId,
 	productName: payload01.productName,
-	productType: payload01.productType
+	productType: payload01.productType,
+	vendor: payload01.vendor
 } as :object {
 	class : "com.ac.vo.Product"
 })]]></dw:set-payload>
@@ -77,7 +79,8 @@ payload map ((payload01 , indexOfPayload01) -> {
 	price: payload01.price,
 	productId: payload01.productId,
 	productName: payload01.productName,
-	productType: payload01.productType
+	productType: payload01.productType,
+	vendor: payload01.vendor
 } as :object {
 	class : "com.ac.vo.Product"
 })]]></dw:set-payload>

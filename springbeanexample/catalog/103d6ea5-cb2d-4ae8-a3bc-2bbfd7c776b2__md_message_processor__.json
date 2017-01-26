@@ -1,0 +1,13 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "wallmarty_json"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {}
+    },
+    "id": "103d6ea5-cb2d-4ae8-a3bc-2bbfd7c776b2",
+    "version": "5.2.0.0"
+}

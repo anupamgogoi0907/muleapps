@@ -11,7 +11,8 @@ public class Product {
     String productType;
     String brand;
     Double price;
-
+    String vendor;
+    
     String manufacturer;
     String originLocation;
     String manufactureDate;
@@ -66,6 +67,12 @@ public class Product {
 	}
 	public void setManufactureDate(String manufactureDate) {
 		this.manufactureDate = manufactureDate;
+	}
+	public String getVendor() {
+		return vendor;
+	}
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
 	}
 
     

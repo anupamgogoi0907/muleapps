@@ -9,11 +9,15 @@
       },
       "price": {
         "type": "integer"
+      },
+      "vendor": {
+        "type": "string"
       }
     },
     "required": [
       "product_name",
-      "price"
+      "price",
+      "vendor"
     ]
   }
 }

@@ -19,6 +19,9 @@
       "price": {
         "type": "integer"
       },
+      "vendor": {
+        "type": "string"
+      },
       "manufacturer": {
         "type": "string"
       },
@@ -35,6 +38,7 @@
       "productType",
       "brand",
       "price",
+      "vendor",
       "manufacturer",
       "originLocation",
       "manufactureDate"

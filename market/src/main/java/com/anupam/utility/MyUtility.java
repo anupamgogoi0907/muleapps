@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class MyUtility {
 
-    private static SimpleDateFormat df=new SimpleDateFormat("dd-MM-yyyy");
+    private static SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 
     public static Map<String, List<Product>> createDummyProductWallmarty() {
         Map<String, List<Product>> map = new HashMap<>();
@@ -18,7 +18,7 @@ public class MyUtility {
 
         // IPhone
         for (int i = 1; i < 10; i++) {
-            Product product = new Product(i, i % 2 == 0 ? "IPhone5" : "IPhone6", "Mobile Phone", "Apple", 185.50 + new Random().nextInt(10), "Apple", "USA", df.format(new Date()));
+            Product product = new Product(i, i % 2 == 0 ? "IPhone5" : "IPhone6", "Mobile Phone", "Apple", 185.50 + new Random().nextInt(10), "www.wallmarty.com", "Apple", "USA", df.format(new Date()));
             productList.add(product);
         }
         map.put("iphone", productList);
@@ -26,7 +26,7 @@ public class MyUtility {
         // Mac
         productList = new ArrayList<>();
         for (int i = 1; i < 10; i++) {
-            Product product = new Product(i, i % 2 == 0 ? "Mac" : "Mac Pro", "Mobile Phone", "Apple", 400.0 + new Random().nextInt(10), "Apple", "USA", df.format(new Date()));
+            Product product = new Product(i, i % 2 == 0 ? "Mac" : "Mac Pro", "Mobile Phone", "Apple", 400.0 + new Random().nextInt(10), "www.wallmarty.com", "Apple", "USA", df.format(new Date()));
             productList.add(product);
         }
         map.put("macbook", productList);
@@ -41,14 +41,14 @@ public class MyUtility {
 
         // IPhone
         for (int i = 1; i < 10; i++) {
-            Product product = new Product(i, i % 3 == 0 ? "IPhone5" : "IPhone6", "Mobile Phone", "Apple", 185.50 + new Random().nextInt(10));
+            Product product = new Product(i, i % 3 == 0 ? "IPhone5" : "IPhone6", "Mobile Phone", "Apple", 185.50 + new Random().nextInt(10), "www.amazona.com");
             productList.add(product);
         }
         map.put("iphone", productList);
 
         // Mac
         for (int i = 1; i < 10; i++) {
-            Product product = new Product(i, i % 3 == 0 ? "Mac Pro" : "IPhone6", "Mobile Phone", "Apple", 450.0 + new Random().nextInt(10));
+            Product product = new Product(i, i % 3 == 0 ? "Mac Pro" : "IPhone6", "Mobile Phone", "Apple", 450.0 + new Random().nextInt(10), "www.amazona.com");
             productList.add(product);
         }
         map.put("macbook", productList);

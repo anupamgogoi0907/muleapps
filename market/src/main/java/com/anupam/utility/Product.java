@@ -11,6 +11,7 @@ public class Product {
     String productType;
     String brand;
     Double price;
+    String vendor;
 
     String manufacturer;
     String originLocation;
@@ -20,25 +21,35 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer productId, String productName, String productType, String brand, Double price) {
+    public Product(Integer productId, String productName, String productType, String brand, Double price, String vendor) {
         this.productId = productId;
         this.productName = productName;
         this.productType = productType;
         this.brand = brand;
         this.price = price;
+        this.vendor = vendor;
     }
 
-    public Product(Integer productId, String productName, String productType, String brand, Double price, String manufacturer, String originLocation, String manufactureDate) {
+    public Product(Integer productId, String productName, String productType, String brand, Double price, String vendor, String manufacturer, String originLocation, String manufactureDate) {
         this.productId = productId;
         this.productName = productName;
         this.productType = productType;
         this.brand = brand;
         this.price = price;
+        this.vendor = vendor;
+
         this.manufacturer = manufacturer;
         this.originLocation = originLocation;
         this.manufactureDate = manufactureDate;
     }
 
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
 
     public Integer getProductId() {
         return productId;
@@ -103,4 +114,5 @@ public class Product {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }

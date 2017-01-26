@@ -5,7 +5,9 @@
             "typeId": "wallmarty_json"
         }
     },
-    "outputMessageMetadata": {},
+    "outputMessageMetadata": {
+        "messagePayload": {}
+    },
     "id": "fe0039a8-d3c5-4265-83a2-0920f4f80a00",
     "version": "5.2.0.0"
 }
