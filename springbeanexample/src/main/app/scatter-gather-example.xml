@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.8.2"
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <http:request-config name="HTTP_Request_Configuration_Wallmarty" protocol="HTTP" host="localhost" port="9090" basePath="/" connectionIdleTimeout="0" doc:name="HTTP Request Configuration"/>
+    <http:request-config name="HTTP_Request_Configuration_Amazona" protocol="HTTP" host="localhost" port="9090" basePath="/" connectionIdleTimeout="0" doc:name="HTTP Request Configuration"/>
+    <flow name="scatter-gather-exampleFlow">
+        <http:listener config-ref="HTTP_8081" path="/market/" doc:name="HTTP"/>
+        <scatter-gather doc:name="Scatter-Gather">
+            <flow-ref name="getWallmartyProductFlow" doc:name="Wallmarty"/>
+            <flow-ref name="getAmazonaProductFlow" doc:name="Amazona"/>
+        </scatter-gather>
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+flatten payload]]></dw:set-payload>
+        </dw:transform-message>
+        <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getWallmartyProductFlow">
+        <http:request config-ref="HTTP_Request_Configuration_Wallmarty" path="/wallmarty" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="type" value="iphone"/>
+            </http:request-builder>
+        </http:request>
+    </flow>
+    <flow name="getAmazonaProductFlow">
+        <http:request config-ref="HTTP_Request_Configuration_Amazona" path="/amazona" method="GET" doc:name="HTTP">
+            <http:request-builder>
+                <http:query-param paramName="type" value="iphone"/>
+            </http:request-builder>
+        </http:request>
+    </flow>
+</mule>

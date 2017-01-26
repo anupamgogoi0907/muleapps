@@ -7,20 +7,20 @@
   <classpathentry kind="output" path="target/classes"/>
   <classpathentry kind="con" path="MULE_RUNTIME"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar">
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.4/asm-5.0.4.jar" sourcepath="M2_REPO/org/ow2/asm/asm/5.0.4/asm-5.0.4-sources.jar">
     <attributes>
       <attribute value="provided" name="org.mule.tooling.scope"/>
     </attributes>
   </classpathentry>
-  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcpg-jdk15on/1.50/bcpg-jdk15on-1.50.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcprov-jdk15on/1.50/bcprov-jdk15on-1.50.jar"/>
-  <classpathentry kind="var" path="M2_REPO/cglib/cglib/3.2.2/cglib-3.2.2.jar">
+  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcpg-jdk15on/1.50/bcpg-jdk15on-1.50.jar" sourcepath="M2_REPO/org/bouncycastle/bcpg-jdk15on/1.50/bcpg-jdk15on-1.50-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcprov-jdk15on/1.50/bcprov-jdk15on-1.50.jar" sourcepath="M2_REPO/org/bouncycastle/bcprov-jdk15on/1.50/bcprov-jdk15on-1.50-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/cglib/cglib/3.2.2/cglib-3.2.2.jar" sourcepath="M2_REPO/cglib/cglib/3.2.2/cglib-3.2.2-sources.jar">
     <attributes>
       <attribute value="provided" name="org.mule.tooling.scope"/>
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/mulesoft/security/mule-module-security-encryption/1.6.0/mule-module-security-encryption-1.6.0.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/mulesoft/security/security-api/1.6.0/security-api-1.6.0.jar"/>
-  <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/xml-security/xmlsec/1.3.0/xmlsec-1.3.0.jar"/>
 </classpath>
