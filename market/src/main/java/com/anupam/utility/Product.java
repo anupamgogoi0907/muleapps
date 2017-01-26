@@ -14,7 +14,7 @@ public class Product {
 
     String manufacturer;
     String originLocation;
-    Date manufactureDate;
+    String manufactureDate;
 
 
     public Product() {
@@ -28,7 +28,7 @@ public class Product {
         this.price = price;
     }
 
-    public Product(Integer productId, String productName, String productType, String brand, Double price, String manufacturer, String originLocation, Date manufactureDate) {
+    public Product(Integer productId, String productName, String productType, String brand, Double price, String manufacturer, String originLocation, String manufactureDate) {
         this.productId = productId;
         this.productName = productName;
         this.productType = productType;
@@ -88,11 +88,11 @@ public class Product {
         this.originLocation = originLocation;
     }
 
-    public Date getManufactureDate() {
+    public String getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(Date manufactureDate) {
+    public void setManufactureDate(String manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 

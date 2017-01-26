@@ -23,7 +23,7 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
                 <flow-ref name="getAllAirlineFlightsFlow" doc:name="getAllAirlineFlightsFlow"/>
             </otherwise>
         </choice>
-        <validation:is-not-null message="Empty Payload" value="#[payload]" doc:name="Validation"/>
+        <validation:is-not-null message="Empty payload" value="#[payload]" doc:name="Validation"/>
         <dw:transform-message doc:name="Transform Message">
             <dw:set-payload><![CDATA[%dw 1.0
 %output application/json

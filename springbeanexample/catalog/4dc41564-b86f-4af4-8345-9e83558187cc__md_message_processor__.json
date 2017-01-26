@@ -1,0 +1,16 @@
+{
+    "inputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "product_pojo"
+        }
+    },
+    "outputMessageMetadata": {
+        "messagePayload": {
+            "connectorName": "#_custom_mule_metadata_type_#",
+            "typeId": "product_json"
+        }
+    },
+    "id": "4dc41564-b86f-4af4-8345-9e83558187cc",
+    "version": "5.2.0.0"
+}

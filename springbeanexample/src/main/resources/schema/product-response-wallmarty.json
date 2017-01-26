@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "productId": {
+        "type": "integer"
+      },
+      "productName": {
+        "type": "string"
+      },
+      "productType": {
+        "type": "string"
+      },
+      "brand": {
+        "type": "string"
+      },
+      "price": {
+        "type": "integer"
+      },
+      "manufacturer": {
+        "type": "string"
+      },
+      "originLocation": {
+        "type": "string"
+      },
+      "manufactureDate": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "productId",
+      "productName",
+      "productType",
+      "brand",
+      "price",
+      "manufacturer",
+      "originLocation",
+      "manufactureDate"
+    ]
+  }
+}

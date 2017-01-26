@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
-http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
     <http:request-config name="HTTP_Request_Configuration_Wallmarty" protocol="HTTP" host="localhost" port="9090" basePath="/" connectionIdleTimeout="0" doc:name="HTTP Request Configuration"/>
     <http:request-config name="HTTP_Request_Configuration_Amazona" protocol="HTTP" host="localhost" port="9090" basePath="/" connectionIdleTimeout="0" doc:name="HTTP Request Configuration"/>
     <flow name="scatter-gather-exampleFlow">
         <http:listener config-ref="HTTP_8081" path="/market/" doc:name="HTTP"/>
         <scatter-gather doc:name="Scatter-Gather">
             <flow-ref name="getWallmartyProductFlow" doc:name="Wallmarty"/>
-            <flow-ref name="getAmazonaProductFlow" doc:name="Amazona"/>
+            <flow-ref name="getAmazonaProductFlow" doc:name="getAmazonaProductFlow"/>
         </scatter-gather>
-        <dw:transform-message doc:name="Transform Message">
+        <dw:transform-message metadata:id="022b0e60-df0b-4067-8645-66c6103b58f2" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/java"/>
             <dw:set-payload><![CDATA[%dw 1.0
 %output application/java
 ---
 flatten payload]]></dw:set-payload>
+        </dw:transform-message>
+        <dw:transform-message metadata:id="4dc41564-b86f-4af4-8345-9e83558187cc" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/java"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+---
+payload map ((payload01 , indexOfPayload01) -> {
+	price: payload01.price,
+	product_name: payload01.productName
+}) orderBy $.price]]></dw:set-payload>
         </dw:transform-message>
         <logger message="#[payload]" level="INFO" doc:name="Logger"/>
     </flow>
@@ -30,6 +42,24 @@ flatten payload]]></dw:set-payload>
                 <http:query-param paramName="type" value="iphone"/>
             </http:request-builder>
         </http:request>
+        <dw:transform-message metadata:id="fe0039a8-d3c5-4265-83a2-0920f4f80a00" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload map ((payload01 , indexOfPayload01) -> {
+	brand: payload01.brand,
+	manufactureDate: payload01.manufactureDate,
+	manufacturer: payload01.manufacturer,
+	originLocation: payload01.originLocation,
+	price: payload01.price,
+	productId: payload01.productId,
+	productName: payload01.productName,
+	productType: payload01.productType
+} as :object {
+	class : "com.ac.vo.Product"
+})]]></dw:set-payload>
+        </dw:transform-message>
     </flow>
     <flow name="getAmazonaProductFlow">
         <http:request config-ref="HTTP_Request_Configuration_Amazona" path="/amazona" method="GET" doc:name="HTTP">
@@ -37,5 +67,20 @@ flatten payload]]></dw:set-payload>
                 <http:query-param paramName="type" value="iphone"/>
             </http:request-builder>
         </http:request>
+        <dw:transform-message metadata:id="8943f160-ed43-4fb5-8470-56366540954e" doc:name="Transform Message">
+            <dw:input-payload mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+---
+payload map ((payload01 , indexOfPayload01) -> {
+	brand: payload01.brand,
+	price: payload01.price,
+	productId: payload01.productId,
+	productName: payload01.productName,
+	productType: payload01.productType
+} as :object {
+	class : "com.ac.vo.Product"
+})]]></dw:set-payload>
+        </dw:transform-message>
     </flow>
 </mule>
