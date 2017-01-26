@@ -15,7 +15,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
         <http:listener config-ref="HTTP_8081" path="/market/" doc:name="HTTP"/>
         <scatter-gather doc:name="Scatter-Gather">
             <flow-ref name="getWallmartyProductFlow" doc:name="Wallmarty"/>
-            <flow-ref name="getAmazonaProductFlow" doc:name="getAmazonaProductFlow"/>
+            <flow-ref name="getAmazonaProductFlow" doc:name="Amazona"/>
         </scatter-gather>
         <dw:transform-message metadata:id="022b0e60-df0b-4067-8645-66c6103b58f2" doc:name="Transform Message">
             <dw:input-payload mimeType="application/java"/>
