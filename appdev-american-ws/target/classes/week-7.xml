@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="week-7Flow">
+        <http:listener config-ref="HTTP_Listener_8081" path="/week7/" doc:name="HTTP"/>
+        <dw:transform-message metadata:id="ca1683b0-c7e5-4b24-a808-76d3155c070f" doc:name="Transform Message">
+            <dw:input-payload doc:sample="json/sample_json.json" mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/java
+%type currency=:string {format: "###.00"}
+%type cust=:object {class: "com.mulesoft.training.Customer"}
+---
+payload map 
+{
+	customer:$.customer as :string,
+	location: $.location as :string,
+	cep: $.cep as :string,
+	price: getPrice($.price)
+} as :cust]]></dw:set-payload>
+        </dw:transform-message>
+        <logger level="INFO" doc:name="Logger"/>
+    </flow>
+    <flow name="getPriceFlow">
+        <expression-component doc:name="Expression"><![CDATA[if(customer.equals('Van'))
+{
+  return  100;
+}
+else
+{
+ return  200;
+}]]></expression-component>
+    </flow>
+</mule>

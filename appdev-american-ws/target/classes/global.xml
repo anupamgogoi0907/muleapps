@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:spring="http://www.springframework.org/schema/beans" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:http="http://www.mulesoft.org/schema/mule/http"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+<mule xmlns:cluster="http://www.mulesoft.org/schema/mule/ee/cluster"
+	xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
@@ -32,27 +34,55 @@ http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/cu
 	<db:mysql-config name="MySQL_Configuration" host="${db.host}"
 		port="${db.port}" user="${db.user}" password="${db.password}"
 		database="${db.database}" doc:name="MySQL Configuration" />
-    <http:request-config name="United_HTTP_Request_COnfiguration" protocol="HTTP" host="ilt.mulesoft-training.com" port="80" doc:name="HTTP Request Configuration" >
-    </http:request-config>
-    <http:request-config name="American_HTTP_Request_Configuration" protocol="HTTP" host="0.0.0.0" port="80" doc:name="HTTP Request Configuration">
-        <http:raml-api-configuration location="api.raml"/>
-    </http:request-config>
-    <ws:consumer-config name="Web_Service_Consumer" service="TicketServiceService" port="TicketServicePort" serviceAddress="http://training.cloudhub.io/essentials/delta" wsdlLocation="http://ilt.mulesoft-training.com/essentials/delta?wsdl" doc:name="Web Service Consumer"/>
-    <configuration defaultExceptionStrategy-ref="global_exception" doc:name="Configuration">
-        <http:config useTransportForUris="false"/>
-    </configuration>
-    <payload-type-filter expectedType="java.util.List" name="Payload" doc:name="Payload"/>
+	<http:request-config name="United_HTTP_Request_COnfiguration"
+		protocol="HTTP" host="ilt.mulesoft-training.com" port="80"
+		doc:name="HTTP Request Configuration">
+	</http:request-config>
+	<http:request-config name="American_HTTP_Request_Configuration"
+		protocol="HTTP" host="0.0.0.0" port="80" doc:name="HTTP Request Configuration">
+		<http:raml-api-configuration location="api.raml" />
+	</http:request-config>
+	<ws:consumer-config name="Web_Service_Consumer"
+		service="TicketServiceService" port="TicketServicePort"
+		serviceAddress="http://training.cloudhub.io/essentials/delta"
+		wsdlLocation="http://ilt.mulesoft-training.com/essentials/delta?wsdl"
+		doc:name="Web Service Consumer" />
 
-<choice-exception-strategy name="global_exception" >
-            <catch-exception-strategy when="#[exception.causeMatches('com.mulesoft.weave.mule.exception.*') || exception.message=='Empty payload' ]" doc:name="400">
-                <set-payload value="NO FLIGHTS TO #[flowVars.code]" doc:name="Set Payload"/>
-                <set-property propertyName="http.status" value="400" doc:name="Property"/>
-                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-            </catch-exception-strategy>
-            <catch-exception-strategy  doc:name="500">
-                <set-payload value="No data available." doc:name="Set Payload"/>
-                <set-property propertyName="http.status" value="500" doc:name="Property"/>
-                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
-            </catch-exception-strategy>
-        </choice-exception-strategy>
+	<configuration defaultExceptionStrategy-ref="global_exception"
+		doc:name="Configuration">
+		
+		<expression-language>
+			<global-functions>
+				def getPrice(customer)
+				{
+				   if(customer.contains('Didi'))
+				   return 100;
+				   else
+				   return 200;
+				}
+			</global-functions>
+		</expression-language>
+	</configuration>
+
+
+	<payload-type-filter expectedType="java.util.List"
+		name="Payload" doc:name="Payload" />
+
+	<choice-exception-strategy name="global_exception">
+		<catch-exception-strategy
+			when="#[exception.causeMatches('com.mulesoft.weave.mule.exception.*') || exception.message=='Empty payload' ]"
+			doc:name="400">
+			<set-payload value="NO FLIGHTS TO #[flowVars.code]"
+				doc:name="Set Payload" />
+			<set-property propertyName="http.status" value="400"
+				doc:name="Property" />
+			<logger message="#[payload]" level="INFO" doc:name="Logger" />
+		</catch-exception-strategy>
+		<catch-exception-strategy doc:name="500">
+			<set-payload value="No data available." doc:name="Set Payload" />
+			<set-property propertyName="http.status" value="500"
+				doc:name="Property" />
+			<logger message="#[payload]" level="INFO" doc:name="Logger" />
+		</catch-exception-strategy>
+	</choice-exception-strategy>
 </mule>

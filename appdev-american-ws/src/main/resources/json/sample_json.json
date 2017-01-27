@@ -1,0 +1,22 @@
+[{
+	"customer":"Van",
+	"location":"numberg",
+	"cep": 11551188,
+    "date":"29121985",
+    "price": 400.00
+},
+{
+	"customer":"Anupam",
+	"location":"SP",
+	"cep": 1307002,
+	"date":"29121985",
+	"price": 400.00
+},
+{
+	"customer":"Didi",
+	"location":"Salvador",
+	"cep":41720075,
+	"date":"29121985",
+	"price": 400.00
+}
+]
