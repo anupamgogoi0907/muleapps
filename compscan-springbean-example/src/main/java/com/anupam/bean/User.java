@@ -1,8 +1,16 @@
 package com.anupam.bean;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Component
 public class User {
+	
+	@Value("${user.firstname}")
 	private String firstName;
+	
 	private String lastName;
+	
 	private String email;
 
 	public String getFirstName() {

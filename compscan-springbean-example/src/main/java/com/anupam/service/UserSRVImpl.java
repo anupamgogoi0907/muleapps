@@ -6,10 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.anupam.bean.User;
 
-//@Service(value="userService")
+@Service(value="userService")
 public class UserSRVImpl implements UserSRV {
 
-//	@Inject
+	@Inject
 	private User user;
 	
 	@Override
