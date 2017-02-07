@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -12,23 +13,16 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
 
 
+	<context:property-placeholder location="classpath:init.properties" />
 	<spring:beans>
 		<context:component-scan base-package="com.anupam.*" />
-
-		<!-- <spring:bean id="userBean" class="com.anupam.bean.User">
-			<spring:property name="firstName" value="Mule" />
-		</spring:bean>
-		<spring:bean id="userService" class="com.anupam.service.UserSRVImpl">
-			<spring:property name="user" ref="userBean" />
-		</spring:bean> -->
-
 	</spring:beans>
-    <context:property-placeholder location="classpath:init.properties"/>
+
 
 	<flow name="component-scan-flow">
 		<http:listener config-ref="HTTP_Listener_8081" path="/cs/"
 			doc:name="HTTP" />
 		<invoke object-ref="userService" method="sayHello" doc:name="Invoke" />
-		<logger level="INFO" doc:name="Logger" message="#[payload]"/>
+		<logger level="INFO" doc:name="Logger" message="#[payload]" />
 	</flow>
 </mule>
