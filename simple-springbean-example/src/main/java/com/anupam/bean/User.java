@@ -4,12 +4,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	
-	public String sayHello()
-	{
-		return "Hello "+getFirstName();
-	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
