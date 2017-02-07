@@ -53,13 +53,11 @@ http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/cu
 		
 		<expression-language>
 			<global-functions>
-				def getPrice(customer)
+				def getPrice()
 				{
-				   if(customer.contains('Didi'))
-				   return 100;
-				   else
-				   return 200;
+				   return 200.0;
 				}
+				
 			</global-functions>
 		</expression-language>
 	</configuration>
