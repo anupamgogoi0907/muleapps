@@ -1,20 +1,26 @@
 package com.anupam.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.anupam.bean.User;
+import com.anupam.service.UserSRVImpl;
 
 @Configuration
-@ComponentScan(basePackages="com.anupam.service")
 public class MySpringConfig {
 
-	@Bean
+	@Bean(name = "userBean")
 	public User userBean() {
 		User user = new User();
 		user.setFirstName("Java Configuration");
 		return user;
+	}
+
+	@Bean(name = "userService")
+	public UserSRVImpl userService() {
+		UserSRVImpl userService = new UserSRVImpl();
+		userService.setUser(userBean());
+		return userService;
 	}
 
 }
