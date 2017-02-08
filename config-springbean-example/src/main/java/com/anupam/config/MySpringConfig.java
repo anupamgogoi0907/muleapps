@@ -1,12 +1,11 @@
 package com.anupam.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import com.anupam.bean.User;
 import com.anupam.service.UserSRVImpl;
 
-@Configuration
+//@Configuration
 public class MySpringConfig {
 
 	@Bean(name = "userBean")
