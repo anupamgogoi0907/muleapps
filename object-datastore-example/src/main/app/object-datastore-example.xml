@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
+	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<spring:beans>
+		<!-- Data Source configuration -->
+		<spring:bean id="dataSource" name="dataSourceBean"
+			class="org.h2.jdbcx.JdbcDataSource">
+			<spring:property name="URL"
+				value="jdbc:h2:tcp://localhost/~/db_objectstore" />
+			<spring:property name="user" value="admin" />
+			<spring:property name="password" value="admin" />
+		</spring:bean>
+
+		<!-- Connector Configuration -->
+		<!-- <spring:bean id="jdbcConnector" class="org.mule.transport.jdbc.JdbcConnector" name="connectorBean">
+			<spring:property name="dataSource" ref="dataSource" />
+			<spring:property name="query">
+				<spring:map>
+					<spring:entry key="insertQueryKey"
+						value="insert into KEY_VALUE (K,VALUE) values (?,?) " />
+				</spring:map>
+			</spring:property>
+		</spring:bean> -->
+
+		<!-- Object Store Configuration -->
+		<!-- <spring:bean id="jdbcStore"
+			class="org.mule.transport.jdbc.store.JdbcObjectStore" name="storeBean">
+			<spring:property name="jdbcConnector" value="jdbcConnector" />
+			<spring:property name="insertQueryKey" value="insertQueryKey" />
+		</spring:bean> -->
+		
+		<!-- My Object Store -->
+		<spring:bean id="myObjectStore" class="com.anupam.os.MyObjectStore">
+		
+		</spring:bean>
+	</spring:beans>
+
+	<http:listener-config name="HTTP_Listener_8081"
+		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
+    <objectstore:config name="ObjectStore__Connector" objectStore-ref="myObjectStore" doc:name="ObjectStoreConnector"/>
+
+	<flow name="object-datastore-exampleFlow">
+		<http:listener config-ref="HTTP_Listener_8081" path="/store/"
+			doc:name="HTTP" />
+        <objectstore:retrieve config-ref="ObjectStore__Connector" doc:name="ObjectStore" key="1"/>
+
+	</flow>
+</mule>

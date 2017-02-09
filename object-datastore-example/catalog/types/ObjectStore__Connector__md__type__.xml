@@ -1,0 +1,30 @@
+<metadata__catalog__entry>
+  <version>5.2.0.0</version>
+  <types class="tree-map">
+    <entry>
+      <org.mule.common.metadata.DefaultMetaDataKey>
+        <id>java.io.Serializable</id>
+        <displayName>java.io.Serializable</displayName>
+        <category>DEFAULT</category>
+        <metaDataKeyPropertiesManager>
+          <properties>
+            <org.mule.common.metadata.key.property.dsql.DsqlFromMetaDataKeyProperty/>
+          </properties>
+        </metaDataKeyPropertiesManager>
+      </org.mule.common.metadata.DefaultMetaDataKey>
+      <org.mule.common.metadata.DefaultPojoMetaDataModel>
+        <implementationClass>java.io.Serializable</implementationClass>
+        <dataType>POJO</dataType>
+        <metaDataModelPropertiesManager>
+          <properties/>
+        </metaDataModelPropertiesManager>
+        <fields/>
+        <clazzName>java.io.Serializable</clazzName>
+        <isInterface>true</isInterface>
+        <name>Serializable</name>
+        <parentNames/>
+      </org.mule.common.metadata.DefaultPojoMetaDataModel>
+    </entry>
+  </types>
+  <connectorName>ObjectStore__Connector</connectorName>
+</metadata__catalog__entry>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.tooling.server.3.8.2.ee" schemaVersion="5.3.0.0">
+    <name>object-datastore-example</name>
+    <description></description>
+    <muleExtension name="ObjectStore" qualifier="org.mule.tooling.ui.contribution.objectstore.3.6.0"/>
+</mule-project>
