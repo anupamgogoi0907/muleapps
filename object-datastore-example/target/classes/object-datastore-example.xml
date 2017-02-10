@@ -41,6 +41,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<!-- My Object Store -->
 		<spring:bean id="myObjectStore" class="com.anupam.os.MyObjectStore" init-method="init">
 			<spring:property  name="insertQueryKey" value="insert into KEY_VALUE (K,V) values (?,?) " />
+			<spring:property name="selectQueryKey" value="select k,v from KEY_VALUE where k = ?"/>
 		</spring:bean>
 	</spring:beans>
 

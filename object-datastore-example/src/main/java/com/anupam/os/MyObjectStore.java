@@ -1,12 +1,15 @@
 package com.anupam.os;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
+import org.jruby.RubyProcess.Sys;
 import org.mule.api.MuleContext;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
@@ -49,6 +52,13 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 	@Override
 	public Serializable retrieve(Serializable key) throws ObjectStoreException {
 		System.out.println("Retrirving data.");
+		try {
+			Connection con=dataSource.getConnection();
+			System.out.println("Connection established");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
