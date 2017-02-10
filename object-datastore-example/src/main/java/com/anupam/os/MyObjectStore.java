@@ -1,22 +1,17 @@
 package com.anupam.os;
 
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
-import org.jruby.RubyProcess.Sys;
 import org.mule.api.MuleContext;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.transport.jdbc.JdbcConnector;
 
 public class MyObjectStore implements ObjectStore<Serializable> {
-	private DataSource dataSource;
+
+	private JdbcConnector jdbcConnector;
 	private String insertQueryKey;
 	private String selectQueryKey;
 	private String deleteQueryKey;
@@ -25,16 +20,8 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 	@Inject
 	MuleContext muleContext;
 
-	JdbcConnector jdbcConnector;
-
 	public void init() {
 		System.out.println("initialised");
-		jdbcConnector=new JdbcConnector(muleContext);
-		jdbcConnector.setDataSource(dataSource);
-		Map queries=new HashMap();
-		queries.put("insertQueryKey", insertQueryKey);
-		jdbcConnector.setQueries(queries);
-		
 	}
 
 	@Override
@@ -52,14 +39,7 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 	@Override
 	public Serializable retrieve(Serializable key) throws ObjectStoreException {
 		System.out.println("Retrirving data.");
-		try {
-			Connection con=dataSource.getConnection();
-			System.out.println("Connection established");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
+		return 100;
 	}
 
 	@Override
@@ -80,12 +60,12 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	}
 
-	public DataSource getDataSource() {
-		return dataSource;
+	public JdbcConnector getJdbcConnector() {
+		return jdbcConnector;
 	}
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
+	public void setJdbcConnector(JdbcConnector jdbcConnector) {
+		this.jdbcConnector = jdbcConnector;
 	}
 
 	public String getInsertQueryKey() {
