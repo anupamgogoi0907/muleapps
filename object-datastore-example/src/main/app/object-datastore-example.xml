@@ -28,7 +28,7 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 		<!-- My Object Store -->
 		<spring:bean id="myObjectStore" class="com.anupam.os.MyObjectStore"
 			init-method="init">
-			<spring:property name="jdbcConnector" ref="jdbcConnector" />
+			<spring:property name="dataSource" ref="dataSource" />
 			<spring:property name="insertQueryKey"
 				value="insert into KEY_VALUE (K,V) values (?,?) " />
 			<spring:property name="selectQueryKey"
@@ -52,13 +52,14 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 	<http:listener-config name="HTTP_Listener_8081"
 		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
 	<objectstore:config name="ObjectStore__Connector"
-		objectStore-ref="jdbcStore" doc:name="ObjectStoreConnector" />
+		objectStore-ref="myObjectStore" doc:name="ObjectStoreConnector" />
 
 	<flow name="object-datastore-exampleFlow">
 		<http:listener config-ref="HTTP_Listener_8081" path="/store/"
 			doc:name="HTTP" />
 		<objectstore:retrieve config-ref="ObjectStore__Connector"
-			doc:name="ObjectStore" key="1" />
+			doc:name="Retrieve" key="1" />
+        <objectstore:store config-ref="ObjectStore__Connector" key="2" value-ref="#[ 'Diana']" doc:name="ObjectStore"/>
 
 	</flow>
 </mule>

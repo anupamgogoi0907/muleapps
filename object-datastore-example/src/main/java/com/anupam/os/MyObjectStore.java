@@ -1,27 +1,41 @@
 package com.anupam.os;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.mule.api.MuleContext;
+import org.mule.api.execution.ExecutionCallback;
+import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
-import org.mule.transport.jdbc.JdbcConnector;
+import org.mule.api.transaction.TransactionConfig;
+import org.mule.config.i18n.CoreMessages;
+import org.mule.execution.TransactionalExecutionTemplate;
+import org.mule.transaction.MuleTransactionConfig;
 
 public class MyObjectStore implements ObjectStore<Serializable> {
 
-	private JdbcConnector jdbcConnector;
 	private String insertQueryKey;
 	private String selectQueryKey;
 	private String deleteQueryKey;
 	private String clearQueryKey;
+	private DataSource dataSource;
+	private TransactionConfig transactionConfig;
+	QueryRunner queryRunner;
 
 	@Inject
 	MuleContext muleContext;
 
 	public void init() {
 		System.out.println("initialised");
+		transactionConfig = new MuleTransactionConfig();
+		queryRunner = new QueryRunner(dataSource);
 	}
 
 	@Override
@@ -32,14 +46,21 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	@Override
 	public void store(Serializable key, Serializable value) throws ObjectStoreException {
-		System.out.println("Storing Data");
-
+		Object[] arguments = new Object[2];
+		arguments[0] = key;
+		arguments[1] = value;
+		this.update(insertQueryKey, arguments);
 	}
 
 	@Override
 	public Serializable retrieve(Serializable key) throws ObjectStoreException {
 		System.out.println("Retrirving data.");
-		return 100;
+		Object[] row = (Object[]) ((Object[]) this.query(selectQueryKey, new ArrayHandler(), new Object[] { key }));
+		if (row == null) {
+			throw new ObjectDoesNotExistException(CoreMessages.objectNotFound(key));
+		} else {
+			return (Serializable) row[1];
+		}
 	}
 
 	@Override
@@ -60,12 +81,49 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	}
 
-	public JdbcConnector getJdbcConnector() {
-		return jdbcConnector;
+	private Object query(final String sql, final ResultSetHandler handler, final Object... arguments)
+			throws ObjectStoreException {
+		try {
+			ExecutionCallback e = new ExecutionCallback() {
+				public Object process() throws Exception {
+					return MyObjectStore.this.queryRunner.query(sql, handler, arguments);
+				}
+			};
+			return this.executeInTransactionTemplate(e);
+		} catch (SQLException var5) {
+			throw new ObjectStoreException(var5);
+		} catch (Exception var6) {
+			throw new ObjectStoreException(var6);
+		}
 	}
 
-	public void setJdbcConnector(JdbcConnector jdbcConnector) {
-		this.jdbcConnector = jdbcConnector;
+	private Object update(final String sql, final Object... arguments) throws ObjectStoreException {
+		try {
+			ExecutionCallback e = new ExecutionCallback() {
+				public Object process() throws Exception {
+					return Integer.valueOf(MyObjectStore.this.queryRunner.update(sql, arguments));
+				}
+			};
+			return this.executeInTransactionTemplate(e);
+		} catch (SQLException var4) {
+			throw new ObjectStoreException(var4);
+		} catch (Exception var5) {
+			throw new ObjectStoreException(var5);
+		}
+	}
+
+	private Object executeInTransactionTemplate(ExecutionCallback<Object> processingCallback) throws Exception {
+		TransactionalExecutionTemplate executionTemplate = TransactionalExecutionTemplate
+				.createTransactionalExecutionTemplate(muleContext, this.transactionConfig);
+		return executionTemplate.execute(processingCallback);
+	}
+
+	public DataSource getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public String getInsertQueryKey() {
