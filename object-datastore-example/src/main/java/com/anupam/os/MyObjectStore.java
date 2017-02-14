@@ -40,8 +40,11 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	@Override
 	public boolean contains(Serializable key) throws ObjectStoreException {
-		// TODO Auto-generated method stub
-		return false;
+		if (key == null) {
+			throw new ObjectStoreException(CoreMessages.objectIsNull("id"));
+		}
+		Serializable value = retrieve(key);
+		return value != null;
 	}
 
 	@Override
@@ -49,7 +52,7 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 		Object[] arguments = new Object[2];
 		arguments[0] = key;
 		arguments[1] = value;
-		this.update(insertQueryKey, arguments);
+		update(insertQueryKey, arguments);
 	}
 
 	@Override
@@ -65,8 +68,12 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	@Override
 	public Serializable remove(Serializable key) throws ObjectStoreException {
-		// TODO Auto-generated method stub
-		return null;
+		if (key == null) {
+			throw new ObjectStoreException(CoreMessages.objectIsNull("id"));
+		}
+		Serializable value = retrieve(key);
+		this.update(deleteQueryKey, new Object[] { key });
+		return value;
 	}
 
 	@Override
@@ -77,19 +84,18 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	@Override
 	public void clear() throws ObjectStoreException {
-		// TODO Auto-generated method stub
-
+		update(clearQueryKey, new Object[0]);
 	}
 
 	private Object query(final String sql, final ResultSetHandler handler, final Object... arguments)
 			throws ObjectStoreException {
 		try {
-			ExecutionCallback e = new ExecutionCallback() {
+			ExecutionCallback<Object> e = new ExecutionCallback<Object>() {
 				public Object process() throws Exception {
 					return MyObjectStore.this.queryRunner.query(sql, handler, arguments);
 				}
 			};
-			return this.executeInTransactionTemplate(e);
+			return executeInTransactionTemplate(e);
 		} catch (SQLException var5) {
 			throw new ObjectStoreException(var5);
 		} catch (Exception var6) {
@@ -99,7 +105,7 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 
 	private Object update(final String sql, final Object... arguments) throws ObjectStoreException {
 		try {
-			ExecutionCallback e = new ExecutionCallback() {
+			ExecutionCallback<Object> e = new ExecutionCallback<Object>() {
 				public Object process() throws Exception {
 					return Integer.valueOf(MyObjectStore.this.queryRunner.update(sql, arguments));
 				}
@@ -113,7 +119,7 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 	}
 
 	private Object executeInTransactionTemplate(ExecutionCallback<Object> processingCallback) throws Exception {
-		TransactionalExecutionTemplate executionTemplate = TransactionalExecutionTemplate
+		TransactionalExecutionTemplate<Object> executionTemplate = TransactionalExecutionTemplate
 				.createTransactionalExecutionTemplate(muleContext, this.transactionConfig);
 		return executionTemplate.execute(processingCallback);
 	}
