@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:core="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:core="http://www.mulesoft.org/schema/mule/core"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
@@ -8,7 +8,8 @@
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
 
 	<spring:beans>
 
@@ -43,19 +44,21 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<objectstore:config name="ObjectStore_Connector"
 		objectStore-ref="myObjectStore" doc:name="ObjectStoreConnector" />
 
-	<flow name="object-datastore-exampleFlow">
+	<flow name="object-datastore-test">
 		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
+        <set-variable variableName="key" value="#[message.inboundProperties.'http.query.params'.k]" doc:name="Key"/>
+        <set-variable variableName="value" value="#[message.inboundProperties.'http.query.params'.v]" doc:name="Value"/>
 		<objectstore:store config-ref="ObjectStore_Connector"
-			doc:name="Store" key="#[message.inboundProperties.'http.query.params'.k]"
-			value-ref="#[message.inboundProperties.'http.query.params'.v]" />
+			doc:name="Store" key="#[flowVars.key]"
+			value-ref="#[flowVars.value]" />
 		<objectstore:retrieve config-ref="ObjectStore_Connector"
-			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Retrieve" />
+			key="#[flowVars.key]" doc:name="Retrieve" />
 		<objectstore:remove config-ref="ObjectStore_Connector"
-			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Remove" />
+			key="#[flowVars.key]" doc:name="Remove" />
 		<logger level="INFO" doc:name="Logger" />
 	</flow>
-	<flow name="object-datastore-exampleFlow1">
+	<flow name="object-datastore-idempotent-filter">
 		<http:listener config-ref="HTTP_Listener_8081" path="/idem/"
 			doc:name="HTTP" />
 		<byte-array-to-string-transformer

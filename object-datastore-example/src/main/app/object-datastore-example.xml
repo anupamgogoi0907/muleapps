@@ -47,13 +47,15 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="object-datastore-test">
 		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
+        <set-variable variableName="key" value="#[message.inboundProperties.'http.query.params'.k]" doc:name="Key"/>
+        <set-variable variableName="value" value="#[message.inboundProperties.'http.query.params'.v]" doc:name="Value"/>
 		<objectstore:store config-ref="ObjectStore_Connector"
-			doc:name="Store" key="#[message.inboundProperties.'http.query.params'.k]"
-			value-ref="#[message.inboundProperties.'http.query.params'.v]" />
+			doc:name="Store" key="#[flowVars.key]"
+			value-ref="#[flowVars.value]" />
 		<objectstore:retrieve config-ref="ObjectStore_Connector"
-			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Retrieve" />
+			key="#[flowVars.key]" doc:name="Retrieve" />
 		<objectstore:remove config-ref="ObjectStore_Connector"
-			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Remove" />
+			key="#[flowVars.key]" doc:name="Remove" />
 		<logger level="INFO" doc:name="Logger" />
 	</flow>
 	<flow name="object-datastore-idempotent-filter">
