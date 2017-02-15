@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc"
-	xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+<mule xmlns:core="http://www.mulesoft.org/schema/mule/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
-	xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
 http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd">
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 
 	<spring:beans>
 
@@ -33,6 +30,9 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 				value="insert into KEY_VALUE (K,V) values (?,?) " />
 			<spring:property name="selectQueryKey"
 				value="select k,v from KEY_VALUE where k = ?" />
+			<spring:property name="deleteQueryKey"
+				value="delete from KEY_VALUE where K = ?" />
+			<spring:property name="clearQueryKey" value="delete from KEY_VALUE" />
 		</spring:bean>
 
 	</spring:beans>
@@ -47,8 +47,22 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
 		<objectstore:store config-ref="ObjectStore_Connector"
-			doc:name="Store" key="2" value-ref="#['Apple']" />
+			doc:name="Store" key="#[message.inboundProperties.'http.query.params'.k]"
+			value-ref="#[message.inboundProperties.'http.query.params'.v]" />
 		<objectstore:retrieve config-ref="ObjectStore_Connector"
-			key="2" doc:name="Retrieve" />
+			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Retrieve" />
+		<objectstore:remove config-ref="ObjectStore_Connector"
+			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Remove" />
+		<logger level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="object-datastore-exampleFlow1">
+		<http:listener config-ref="HTTP_Listener_8081" path="/idem/"
+			doc:name="HTTP" />
+		<byte-array-to-string-transformer
+			doc:name="Byte Array to String" />
+		<idempotent-message-filter doc:name="Idempotent Message" idExpression="#[message.inboundProperties.'http.request.path'+message.payload ]">
+			<spring-object-store ref="myObjectStore" />
+		</idempotent-message-filter>
+		<logger level="INFO" doc:name="Logger" />
 	</flow>
 </mule>

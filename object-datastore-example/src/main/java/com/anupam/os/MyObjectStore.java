@@ -11,7 +11,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.mule.api.MuleContext;
 import org.mule.api.execution.ExecutionCallback;
-import org.mule.api.store.ObjectDoesNotExistException;
 import org.mule.api.store.ObjectStore;
 import org.mule.api.store.ObjectStoreException;
 import org.mule.api.transaction.TransactionConfig;
@@ -60,7 +59,7 @@ public class MyObjectStore implements ObjectStore<Serializable> {
 		System.out.println("Retrirving data.");
 		Object[] row = (Object[]) ((Object[]) this.query(selectQueryKey, new ArrayHandler(), new Object[] { key }));
 		if (row == null) {
-			throw new ObjectDoesNotExistException(CoreMessages.objectNotFound(key));
+			return null;
 		} else {
 			return (Serializable) row[1];
 		}

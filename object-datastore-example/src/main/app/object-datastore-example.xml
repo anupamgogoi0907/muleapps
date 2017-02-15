@@ -47,10 +47,22 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
 		<objectstore:store config-ref="ObjectStore_Connector"
-			doc:name="Store" key="#[message.inboundProperties.'http.query.params'.k]" value-ref="#[message.inboundProperties.'http.query.params'.v]" />
+			doc:name="Store" key="#[message.inboundProperties.'http.query.params'.k]"
+			value-ref="#[message.inboundProperties.'http.query.params'.v]" />
 		<objectstore:retrieve config-ref="ObjectStore_Connector"
 			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Retrieve" />
-        <objectstore:remove config-ref="ObjectStore_Connector" key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Remove"/>
+		<objectstore:remove config-ref="ObjectStore_Connector"
+			key="#[message.inboundProperties.'http.query.params'.k]" doc:name="Remove" />
+		<logger level="INFO" doc:name="Logger" />
+	</flow>
+	<flow name="object-datastore-exampleFlow1">
+		<http:listener config-ref="HTTP_Listener_8081" path="/idem/"
+			doc:name="HTTP" />
+		<byte-array-to-string-transformer
+			doc:name="Byte Array to String" />
+		<idempotent-message-filter doc:name="Idempotent Message" idExpression="#[message.inboundProperties.'http.request.path'+message.payload ]">
+			<spring-object-store ref="myObjectStore" />
+		</idempotent-message-filter>
 		<logger level="INFO" doc:name="Logger" />
 	</flow>
 </mule>
