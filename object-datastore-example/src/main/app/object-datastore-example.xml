@@ -47,11 +47,11 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
 		<objectstore:store config-ref="ObjectStore_Connector"
-			doc:name="Store" key="2" value-ref="#['Apple']" />
+			doc:name="Store" key="3" value-ref="#['Apple']" />
 		<objectstore:retrieve config-ref="ObjectStore_Connector"
 			key="2" doc:name="Retrieve" />
 		<objectstore:remove config-ref="ObjectStore_Connector"
-			key="1" doc:name="Remove" />
+			key="3" doc:name="Remove" />
 		<logger level="INFO" doc:name="Logger" />
 	</flow>
 </mule>
