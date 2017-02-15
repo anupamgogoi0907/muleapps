@@ -27,7 +27,7 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 
 		<!-- My Object Store -->
 		<spring:bean id="myObjectStore" class="com.anupam.os.MyObjectStore"
-			init-method="init">
+			init-method="init" name="myObjectStoreBean">
 			<spring:property name="dataSource" ref="dataSource" />
 			<spring:property name="insertQueryKey"
 				value="insert into KEY_VALUE (K,V) values (?,?) " />
@@ -35,31 +35,20 @@ http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/
 				value="select k,v from KEY_VALUE where k = ?" />
 		</spring:bean>
 
-		<spring:bean name="jdbcStore"
-			class="org.mule.transport.jdbc.store.JdbcObjectStore">
-			<spring:property name="jdbcConnector" ref="jdbcConnector"></spring:property>
-			<spring:property name="selectQueryKey" value="selectQueryKey"></spring:property>
-		</spring:bean>
 	</spring:beans>
 
-	<jdbc-ee:connector name="jdbcConnector"
-		pollingFrequency="1000" dataSource-ref="dataSource"
-		transactionPerMessage="false" doc:name="Database">
-		<jdbc-ee:query key="selectQueryKey"
-			value="select k,v from KEY_VALUE where k = ?"></jdbc-ee:query>
-	</jdbc-ee:connector>
 
 	<http:listener-config name="HTTP_Listener_8081"
 		host="0.0.0.0" port="8081" doc:name="HTTP Listener Configuration" />
-	<objectstore:config name="ObjectStore__Connector"
+	<objectstore:config name="ObjectStore_Connector"
 		objectStore-ref="myObjectStore" doc:name="ObjectStoreConnector" />
 
 	<flow name="object-datastore-exampleFlow">
-		<http:listener config-ref="HTTP_Listener_8081" path="/store/"
+		<http:listener config-ref="HTTP_Listener_8081" path="/objectstore/"
 			doc:name="HTTP" />
-		<objectstore:retrieve config-ref="ObjectStore__Connector"
-			doc:name="Retrieve" key="1" />
-        <objectstore:store config-ref="ObjectStore__Connector" key="2" value-ref="#[ 'Diana']" doc:name="ObjectStore"/>
-
+		<objectstore:store config-ref="ObjectStore_Connector"
+			doc:name="Store" key="2" value-ref="#['Apple']" />
+		<objectstore:retrieve config-ref="ObjectStore_Connector"
+			key="2" doc:name="Retrieve" />
 	</flow>
 </mule>
