@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:core="http://www.mulesoft.org/schema/mule/core"
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:core="http://www.mulesoft.org/schema/mule/core"
 	xmlns:http="http://www.mulesoft.org/schema/mule/http"
 	xmlns:objectstore="http://www.mulesoft.org/schema/mule/objectstore"
 	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
@@ -9,7 +9,8 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/objectstore http://www.mulesoft.org/schema/mule/objectstore/current/mule-objectstore.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
 
 	<spring:beans>
 
@@ -61,11 +62,12 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 	<flow name="object-datastore-idempotent-filter">
 		<http:listener config-ref="HTTP_Listener_8081" path="/idem/"
 			doc:name="HTTP" />
-		<byte-array-to-string-transformer
-			doc:name="Byte Array to String" />
-		<idempotent-message-filter doc:name="Idempotent Message" idExpression="#[message.inboundProperties.'http.request.path'+message.payload ]">
+        <json:json-to-object-transformer returnClass="java.util.Map" doc:name="JSON to Object"/>
+        <set-variable variableName="id" value="#[message.inboundProperties.'http.listener.path'+payload['product']]" doc:name="Id"/>
+		<idempotent-message-filter doc:name="Idempotent Message" idExpression="#[flowVars.id]" valueExpression="#[payload]">
 			<spring-object-store ref="myObjectStore" />
 		</idempotent-message-filter>
 		<logger level="INFO" doc:name="Logger" />
+        <set-payload value="#['Messaged passed thru the filter']" doc:name="Set Payload"/>
 	</flow>
 </mule>
