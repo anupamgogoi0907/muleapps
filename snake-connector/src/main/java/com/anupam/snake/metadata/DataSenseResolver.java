@@ -16,6 +16,7 @@ import org.mule.common.metadata.builder.PojoMetaDataBuilder;
 
 import com.anupam.snake.model.Author;
 import com.anupam.snake.model.Book;
+import com.anupam.snake.model.WPPost;
 
 /**
  * Category which can differentiate between input or output MetaDataRetriever
@@ -30,7 +31,7 @@ public class DataSenseResolver {
 		// Generate the keys
 		keys.add(new DefaultMetaDataKey("author_id", "User"));
 		keys.add(new DefaultMetaDataKey("book_id", "Book"));
-
+		keys.add(new DefaultMetaDataKey("posts_id", "Posts"));
 		return keys;
 	}
 
@@ -42,12 +43,12 @@ public class DataSenseResolver {
 		if ("author_id".equals(entityKey.getId())) {
 			pojoObject = builder.createPojo(Author.class);
 
-		}
-
-		else if ("book_id".equals(entityKey.getId())) {
+		} else if ("book_id".equals(entityKey.getId())) {
 			pojoObject = builder.createPojo(Book.class);
+		} else if ("posts_id".equals(entityKey.getId())) {
+			pojoObject = builder.createList().ofPojo(WPPost.class);
 		} else {
-			pojoObject = builder.createPojo(Author.class);
+			pojoObject=builder.createPojo(String.class);
 		}
 
 		MetaDataModel model = pojoObject.build();

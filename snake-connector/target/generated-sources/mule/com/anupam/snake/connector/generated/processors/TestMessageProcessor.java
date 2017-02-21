@@ -38,7 +38,7 @@ import org.mule.security.oauth.callback.ProcessCallback;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T01:43:25-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
 public class TestMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
@@ -141,7 +141,7 @@ public class TestMessageProcessor
 
     @Override
     public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
-        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("User", null);
+        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("author_id", null);
         metaDataKey.setCategory("DataSenseResolver");
         metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "test"));
         Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
@@ -149,7 +149,7 @@ public class TestMessageProcessor
             return genericMetaData;
         }
         MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("User", null);
+        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("author_id", null);
         keyForStudio.setCategory("DataSenseResolver");
         metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
         MetaDataModel wrappedMetaDataModel = metaDataPayload;

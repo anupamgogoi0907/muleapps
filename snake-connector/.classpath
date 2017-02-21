@@ -4,7 +4,6 @@
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="target/generated-sources/mule"/>
-	<classpathentry including="**/*.java" kind="src" path="target/generated-sources/annotations"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar" sourcepath="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar"/>
@@ -140,15 +139,16 @@
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-frontend-simple/2.7.15/cxf-rt-frontend-simple-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-frontend-simple/2.7.15/cxf-rt-frontend-simple-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-bindings-soap/2.7.15/cxf-rt-bindings-soap-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-bindings-soap/2.7.15/cxf-rt-bindings-soap-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-databinding-jaxb/2.7.15/cxf-rt-databinding-jaxb-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-databinding-jaxb/2.7.15/cxf-rt-databinding-jaxb-2.7.15-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13.jar" sourcepath="M2_REPO/com/sun/xml/bind/jaxb-impl/2.1.13/jaxb-impl-2.1.13-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-impl/2.2.6/jaxb-impl-2.2.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-frontend-jaxws/2.7.15/cxf-rt-frontend-jaxws-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-frontend-jaxws/2.7.15/cxf-rt-frontend-jaxws-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/xml-resolver/xml-resolver/1.2/xml-resolver-1.2.jar" sourcepath="M2_REPO/xml-resolver/xml-resolver/1.2/xml-resolver-1.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-bindings-xml/2.7.15/cxf-rt-bindings-xml-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-bindings-xml/2.7.15/cxf-rt-bindings-xml-2.7.15-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.7.15/cxf-rt-transports-http-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.7.15/cxf-rt-transports-http-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.7.15/cxf-rt-ws-addr-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-addr/2.7.15/cxf-rt-ws-addr-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-policy/2.7.15/cxf-rt-ws-policy-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-policy/2.7.15/cxf-rt-ws-policy-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/neethi/neethi/3.0.3/neethi-3.0.3.jar" sourcepath="M2_REPO/org/apache/neethi/neethi/3.0.3/neethi-3.0.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-databinding-aegis/2.7.15/cxf-rt-databinding-aegis-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-databinding-aegis/2.7.15/cxf-rt-databinding-aegis-2.7.15-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-xjc/2.1.13/jaxb-xjc-2.1.13.jar" sourcepath="M2_REPO/com/sun/xml/bind/jaxb-xjc/2.1.13/jaxb-xjc-2.1.13-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/sun/xml/bind/jaxb-xjc/2.2.6/jaxb-xjc-2.2.6.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-databinding-jibx/2.7.15/cxf-rt-databinding-jibx-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-databinding-jibx/2.7.15/cxf-rt-databinding-jibx-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-tools-common/2.7.15/cxf-tools-common-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-tools-common/2.7.15/cxf-tools-common-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jibx/jibx-run/1.2.5/jibx-run-1.2.5.jar" sourcepath="M2_REPO/org/jibx/jibx-run/1.2.5/jibx-run-1.2.5-sources.jar"/>
@@ -166,7 +166,6 @@
 	<classpathentry kind="var" path="M2_REPO/org/opensaml/xmltooling/1.4.1/xmltooling-1.4.1.jar" sourcepath="M2_REPO/org/opensaml/xmltooling/1.4.1/xmltooling-1.4.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-ws-rm/2.7.15/cxf-rt-ws-rm-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-ws-rm/2.7.15/cxf-rt-ws-rm-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-management/2.7.15/cxf-rt-management-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-management/2.7.15/cxf-rt-management-2.7.15-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.7.15/cxf-rt-transports-http-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-rt-transports-http/2.7.15/cxf-rt-transports-http-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/cxf/cxf-wstx-msv-validation/2.7.15/cxf-wstx-msv-validation-2.7.15.jar" sourcepath="M2_REPO/org/apache/cxf/cxf-wstx-msv-validation/2.7.15/cxf-wstx-msv-validation-2.7.15-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/java/dev/msv/msv-core/2011.1/msv-core-2011.1.jar" sourcepath="M2_REPO/net/java/dev/msv/msv-core/2011.1/msv-core-2011.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/sun/msv/datatype/xsd/xsdlib/2010.1/xsdlib-2010.1.jar" sourcepath="M2_REPO/com/sun/msv/datatype/xsd/xsdlib/2010.1/xsdlib-2010.1-sources.jar"/>

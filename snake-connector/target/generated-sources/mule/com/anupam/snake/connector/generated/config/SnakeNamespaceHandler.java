@@ -14,7 +14,7 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T01:43:25-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
 public class SnakeNamespaceHandler
     extends NamespaceHandlerSupport
 {
@@ -44,9 +44,9 @@ public class SnakeNamespaceHandler
             handleException("config", "@Config", ex);
         }
         try {
-            this.registerBeanDefinitionParser("greet", new GreetDefinitionParser());
+            this.registerBeanDefinitionParser("get-posts", new GetPostsDefinitionParser());
         } catch (NoClassDefFoundError ex) {
-            handleException("greet", "@Processor", ex);
+            handleException("get-posts", "@Processor", ex);
         }
         try {
             this.registerBeanDefinitionParser("add-entity", new AddEntityDefinitionParser());

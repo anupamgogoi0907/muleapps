@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.mulesoft.cloudhub:cloudhub-client-api:1.7.1-HYDRA">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mulesoft/cloudhub/cloudhub-client-api/1.7.1-HYDRA/cloudhub-client-api-1.7.1-HYDRA.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mulesoft/cloudhub/cloudhub-client-api/1.7.1-HYDRA/cloudhub-client-api-1.7.1-HYDRA-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mulesoft/cloudhub/cloudhub-client-api/1.7.1-HYDRA/cloudhub-client-api-1.7.1-HYDRA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

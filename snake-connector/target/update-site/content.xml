@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?metadataRepository version='1.1.0'?>
+<repository name='file:/Users/agogoi/git/muleapps/snake-connector/target/update-site/ - metadata' type='org.eclipse.equinox.internal.p2.metadata.repository.LocalMetadataRepository' version='1.0.0'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1487711321736'/>
+    <property name='p2.compressed' value='false'/>
+  </properties>
+  <units size='4'>
+    <unit id='org.mule.tooling.ui.contribution.snake.3.5.0' version='1.0.0.201702211808'>
+      <update id='org.mule.tooling.ui.contribution.snake.3.5.0' range='[0.0.0,1.0.0.201702211808)' severity='0'/>
+      <properties size='1'>
+        <property name='org.eclipse.equinox.p2.name' value='Snake'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.contribution.snake.3.5.0' version='1.0.0.201702211808'/>
+        <provided namespace='osgi.bundle' name='org.mule.tooling.ui.contribution.snake.3.5.0' version='1.0.0.201702211808'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+      </provides>
+      <requires size='3'>
+        <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+        <required namespace='osgi.bundle' name='org.mule.tooling.core' range='1.0.0'/>
+      </requires>
+      <artifacts size='1'>
+        <artifact classifier='osgi.bundle' id='org.mule.tooling.ui.contribution.snake.3.5.0' version='1.0.0.201702211808'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='2'>
+          <instruction key='manifest'>
+            Bundle-SymbolicName: org.mule.tooling.ui.contribution.snake.3.5.0;singleton:=true&#xA;Bundle-Version: 1.0.0.201702211808
+          </instruction>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+    </unit>
+    <unit id='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.jar' version='1.0.0.201702211808'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Snake Connector (Mule 3.5.0+)'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Mulesoft, Inc.'/>
+      </properties>
+      <provides size='3'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.jar' version='1.0.0.201702211808'/>
+        <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='feature' version='1.0.0'/>
+        <provided namespace='org.eclipse.update.feature' name='org.mule.tooling.ui.extension.snake-connector.3.5.0' version='1.0.0.201702211808'/>
+      </provides>
+      <filter>
+        (org.eclipse.update.install.features=true)
+      </filter>
+      <artifacts size='1'>
+        <artifact classifier='org.eclipse.update.feature' id='org.mule.tooling.ui.extension.snake-connector.3.5.0' version='1.0.0.201702211808'/>
+      </artifacts>
+      <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+      <touchpointData size='1'>
+        <instructions size='1'>
+          <instruction key='zipped'>
+            true
+          </instruction>
+        </instructions>
+      </touchpointData>
+      <licenses size='1'>
+        <license>
+
+        </license>
+      </licenses>
+    </unit>
+    <unit id='file:/Users/agogoi/git/muleapps/snake-connector/target/classes/category.xml.com.anupam' version='1.0.0.2--cKMyVl7735G37755I3I'>
+      <properties size='2'>
+        <property name='org.eclipse.equinox.p2.name' value='Community'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='file:/Users/agogoi/git/muleapps/snake-connector/target/classes/category.xml.com.anupam' version='1.0.0.2--cKMyVl7735G37755I3I'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.group' range='[1.0.0.201702211808,1.0.0.201702211808]'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    <unit id='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.group' version='1.0.0.201702211808' singleton='false'>
+      <update id='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.group' range='[0.0.0,1.0.0.201702211808)' severity='0'/>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Snake Connector (Mule 3.5.0+)'/>
+        <property name='org.eclipse.equinox.p2.provider' value='Mulesoft, Inc.'/>
+        <property name='org.eclipse.equinox.p2.type.group' value='true'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.group' version='1.0.0.201702211808'/>
+      </provides>
+      <requires size='2'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.contribution.snake.3.5.0' range='[1.0.0.201702211808,1.0.0.201702211808]'/>
+        <required namespace='org.eclipse.equinox.p2.iu' name='org.mule.tooling.ui.extension.snake-connector.3.5.0.feature.jar' range='[1.0.0.201702211808,1.0.0.201702211808]'>
+          <filter>
+            (org.eclipse.update.install.features=true)
+          </filter>
+        </required>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+      <licenses size='1'>
+        <license>
+
+        </license>
+      </licenses>
+    </unit>
+  </units>
+</repository>

@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T01:43:25-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
 public class SnakeConnectorLifecycleInjectionAdapter
     extends SnakeConnectorMetadataAdapter
     implements MuleContextAware, Disposable, Initialisable, Startable, Stoppable
@@ -34,6 +34,7 @@ public class SnakeConnectorLifecycleInjectionAdapter
     public void start()
         throws MuleException
     {
+        super.init();
     }
 
     @Override

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='file:/Users/agogoi/git/muleapps/snake-connector/target/update-site/ - artifacts' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.timestamp' value='1487711320186'/>
+    <property name='p2.compressed' value='false'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='2'>
+    <artifact classifier='org.eclipse.update.feature' id='org.mule.tooling.ui.extension.snake-connector.3.5.0' version='1.0.0.201702211808'>
+      <properties size='4'>
+        <property name='artifact.size' value='643'/>
+        <property name='download.size' value='643'/>
+        <property name='download.md5' value='907ee8cc73776b1462dcb2e9e961cb43'/>
+        <property name='download.contentType' value='application/zip'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mule.tooling.ui.contribution.snake.3.5.0' version='1.0.0.201702211808'>
+      <properties size='3'>
+        <property name='artifact.size' value='396738'/>
+        <property name='download.size' value='396738'/>
+        <property name='download.md5' value='6bcbb27d3558c57ef9f02d0e318d02d0'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -19,24 +19,7 @@
           "typeMirror": "java.lang.String",
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
-          "javaName": "greeting",
-          "description": "Greeting message"
-        },
-        {
-          "javaTypeName": "String",
-          "fullQualifiedJavaTypeName": "java.lang.String",
-          "defaultValue": "How are you?",
-          "isOptional": true,
-          "isRefOnly": false,
-          "isPayload": false,
-          "isComplexType": false,
-          "isEnum": false,
-          "isString": true,
-          "typeMirror": "java.lang.String",
-          "isHttpCallback": false,
-          "isArrayOrListOrMap": false,
-          "javaName": "reply",
-          "description": "Reply message"
+          "javaName": "blogURL"
         }
       ],
       "javaName": "ConnectorConfig",
@@ -49,12 +32,10 @@
     {
       "isPaged": false,
       "isBatch": false,
-      "samples": [
-        "\u003csnake:greet config-ref\u003d\"\" friend\u003d\"#[map-payload:friend]\" /\u003e"
-      ],
+      "samples": [],
       "javaReturnType": {
-        "javaTypeName": "String",
-        "fullQualifiedJavaTypeName": "java.lang.String",
+        "javaTypeName": "Object",
+        "fullQualifiedJavaTypeName": "java.lang.Object",
         "isOptional": false,
         "isRefOnly": false,
         "isPayload": false,
@@ -64,26 +45,11 @@
         "isHttpCallback": false,
         "description": ""
       },
-      "parameters": [
-        {
-          "javaTypeName": "String",
-          "fullQualifiedJavaTypeName": "java.lang.String",
-          "isOptional": false,
-          "isRefOnly": false,
-          "isPayload": false,
-          "isComplexType": false,
-          "isEnum": false,
-          "isString": true,
-          "typeMirror": "java.lang.String",
-          "isHttpCallback": false,
-          "isArrayOrListOrMap": false,
-          "javaName": "friend"
-        }
-      ],
+      "parameters": [],
       "apiDocUrl": "",
-      "javaName": "greet",
-      "friendlyName": "Greet",
-      "xsdName": "greet"
+      "javaName": "getPosts",
+      "friendlyName": "Get posts",
+      "xsdName": "get-posts"
     },
     {
       "isPaged": false,
