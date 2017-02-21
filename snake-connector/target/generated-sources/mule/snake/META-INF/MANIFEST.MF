@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Snake
+Bundle-SymbolicName: org.mule.tooling.ui.contribution.snake.3.5.0;singleton:=true
+Bundle-Version: 1.0.0.201702211343
+Bundle-Activator: org.mule.tooling.ui.contribution.SnakeActivator
+Bundle-Vendor: 
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.mule.tooling.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Eclipse-BundleShape: dir

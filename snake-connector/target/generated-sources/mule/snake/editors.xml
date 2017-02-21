@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/snake" prefix="snake">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Snake" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Snake: Configuration" description="Global Configuration configuration information." icon="icons/theme.classic/snake-connector-small.png" localId="config" image="icons/theme.classic/snake-connector-large.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/snake/parentConfig" connectivityTesting="off" metaData="dynamic" metaDataKeyDisplay="DISPLAY_NAME" supportsUserDefinedMetaData="false">
+    <attribute-category caption="General" description="Snake configuration properties.">
+      <group id="snakeGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <useMetaData name="useMetaData" caption="useMetaData"></useMetaData>
+        <string defaultValue="Hello" name="greeting" caption="Greeting" description="Greeting message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="How are you?" name="reply" caption="Reply" description="Reply message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractsnakeconnectorgeneric" description="Interact with Snake." icon="icons/theme.classic/snake-connector-small.png" localId="abstractSnakeConnectorGeneric" image="icons/theme.classic/snake-connector-large.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractSnakeConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/snake/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.snake" caption="Snake" description="" icon="icons/theme.classic/snake-connector-small.png" localId="snake-connector" image="icons/theme.classic/snake-connector-large.png" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="snakeConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Snake operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/add-entity" modeLabel="Add entity"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/greet" modeLabel="Greet"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/test" modeLabel="Test"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" categories="DataSenseResolver" caption="Add Entity" icon="icons/theme.classic/snake-connector-small.png" localId="add-entity" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <type-chooser associatedConfig="config-ref" affects="BOTH" name="key" caption="Key" description="" supportsExpressions="true" required="true" javaType="java.lang.String"></type-chooser>
+        <string defaultValue="#[payload]" name="entityData-ref" caption="Entity Data Reference" description="" required="false" javaType="java.lang.Object"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" categories="DataSenseResolver" caption="Greet" icon="icons/theme.classic/snake-connector-small.png" localId="greet" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="friend" caption="Friend" description="" required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" metaDataStaticKey="User" categories="DataSenseResolver" caption="Test" icon="icons/theme.classic/snake-connector-small.png" localId="test" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string defaultValue="#[payload]" name="bookTitle" caption="Book Title" description="" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>

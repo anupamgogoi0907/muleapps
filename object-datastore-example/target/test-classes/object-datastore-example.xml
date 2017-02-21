@@ -68,6 +68,6 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
 			<spring-object-store ref="myObjectStore" />
 		</idempotent-message-filter>
 		<logger level="INFO" doc:name="Logger" />
-        <set-payload value="#['Messaged passed thru the filter']" doc:name="Set Payload"/>
+        <set-payload value="#['Message passed thru the filter']" doc:name="Set Payload"/>
 	</flow>
 </mule>

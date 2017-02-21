@@ -1,0 +1,3 @@
+<!-- BEGIN_INCLUDE(snake:greet) -->
+    <snake:greet config-ref="" friend="#[map-payload:friend]" />
+<!-- END_INCLUDE(snake:greet) -->
