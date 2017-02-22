@@ -40,11 +40,11 @@ public class SnakeConnector {
 
 	@Processor
 	@MetaDataStaticKey(type = "book_list_id")
-	public Object test(@Default("#[payload]") String bookTitle) {
+	public Object test() {
 		List<Book> list = new ArrayList<>();
-		list.add(new Book(bookTitle, "ISBN-1234"));
-		list.add(new Book(bookTitle, "ISBN-3333"));
-		list.add(new Book(bookTitle, "ISBN-4454"));
+		list.add(new Book("Book 1", "ISBN-1234"));
+		list.add(new Book("Book 2", "ISBN-3333"));
+		list.add(new Book("Book 3", "ISBN-4454"));
 		return list;
 	}
 
