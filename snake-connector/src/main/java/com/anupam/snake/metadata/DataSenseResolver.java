@@ -12,11 +12,9 @@ import org.mule.common.metadata.MetaData;
 import org.mule.common.metadata.MetaDataKey;
 import org.mule.common.metadata.MetaDataModel;
 import org.mule.common.metadata.builder.DefaultMetaDataBuilder;
-import org.mule.common.metadata.builder.PojoMetaDataBuilder;
 
 import com.anupam.snake.model.Author;
 import com.anupam.snake.model.Book;
-import com.anupam.snake.model.WPPost;
 
 /**
  * Category which can differentiate between input or output MetaDataRetriever
@@ -31,30 +29,25 @@ public class DataSenseResolver {
 		// Generate the keys
 		keys.add(new DefaultMetaDataKey("author_id", "User"));
 		keys.add(new DefaultMetaDataKey("book_id", "Book"));
-		keys.add(new DefaultMetaDataKey("posts_id", "Posts"));
+		keys.add(new DefaultMetaDataKey("book_list_id", "List Book"));
 		return keys;
 	}
 
 	@MetaDataRetriever
 	public MetaData getMetaData(MetaDataKey entityKey) throws Exception {
-		DefaultMetaDataBuilder builder = new DefaultMetaDataBuilder();
-		PojoMetaDataBuilder<?> pojoObject = null;
-
 		if ("author_id".equals(entityKey.getId())) {
-			pojoObject = builder.createPojo(Author.class);
-
+			MetaDataModel authorModel = new DefaultMetaDataBuilder().createPojo(Author.class).build();
+			return new DefaultMetaData(authorModel);
 		} else if ("book_id".equals(entityKey.getId())) {
-			pojoObject = builder.createPojo(Book.class);
-		} else if ("posts_id".equals(entityKey.getId())) {
-			pojoObject = builder.createList().ofPojo(WPPost.class);
+			MetaDataModel bookModel = new DefaultMetaDataBuilder().createPojo(Book.class).build();
+			return new DefaultMetaData(bookModel);
+		} else if ("book_list_id".equals(entityKey.getId())) {
+			MetaDataModel bookListModel = new DefaultMetaDataBuilder().createList().ofPojo(Book.class).build();
+			return new DefaultMetaData(bookListModel);
 		} else {
-			pojoObject=builder.createPojo(String.class);
+			MetaDataModel defaultModel = new DefaultMetaDataBuilder().createPojo(String.class).build();
+			return new DefaultMetaData(defaultModel);
 		}
-
-		MetaDataModel model = pojoObject.build();
-		MetaData metaData = new DefaultMetaData(model);
-
-		return metaData;
 	}
 
 }

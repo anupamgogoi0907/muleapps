@@ -31,7 +31,7 @@ public class Test {
         Result<List<MetaDataKey>> keys=dispatcher.fetchMetaDataKeys();
         List<MetaDataKey> listKeys=keys.get();
 
-        MetaDataKey key_posts=listKeys.get(2);
+        MetaDataKey key_posts=listKeys.get(3);
         Result<MetaData> metaDataResult=dispatcher.fetchMetaData(key_posts);
         System.out.print("");
     }
