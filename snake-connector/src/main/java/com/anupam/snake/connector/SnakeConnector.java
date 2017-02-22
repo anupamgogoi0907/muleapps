@@ -15,6 +15,7 @@ import org.mule.api.annotations.param.MetaDataStaticKey;
 
 import com.anupam.snake.config.ConnectorConfig;
 import com.anupam.snake.metadata.DataSenseResolver;
+import com.anupam.snake.model.Author;
 import com.anupam.snake.model.Book;
 
 @Connector(name = "snake", friendlyName = "Snake")
@@ -30,17 +31,27 @@ public class SnakeConnector {
 	}
 
 	@Processor
-	public Object addEntity(@MetaDataKeyParam(affects = MetaDataKeyParamAffectsType.BOTH) String key,
+	public Object getByType(@MetaDataKeyParam(affects = MetaDataKeyParamAffectsType.BOTH) String entityType,
 			@Default("#[payload]") Object entityData) {
-		Book book = new Book();
-		book.setBookTitle("Java");
-		book.setIsbn("B1234");
-		return book;
+		
+		if ("Author".equals(entityType)) {
+			return new Author("Anupam", "Gogoi");
+		} else if ("Book".equals(entityType)) {
+			return new Book("Mule", "ISBN-1234");
+		} else {
+			return null;
+		}
+	}
+
+	@Processor
+	@MetaDataStaticKey(type = "book_id")
+	public Object getBook() {
+		return new Book("Java", "ISBN-333");
 	}
 
 	@Processor
 	@MetaDataStaticKey(type = "book_list_id")
-	public Object test() {
+	public Object getListBooks() {
 		List<Book> list = new ArrayList<>();
 		list.add(new Book("Book 1", "ISBN-1234"));
 		list.add(new Book("Book 2", "ISBN-3333"));
