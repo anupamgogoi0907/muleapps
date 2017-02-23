@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:spring="http://www.springframework.org/schema/beans"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:snake="http://www.mulesoft.org/schema/mule/snake"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.mulesoft.org/schema/mule/snake http://www.mulesoft.org/schema/mule/snake/current/mule-snake.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd ">
+   <context:property-placeholder location="automation-credentials.properties"/>
+   <snake:config doc:name="config" name="config"/>
+   <flow doc:name="get-book" name="get-book">
+      <snake:get-book config-ref="config"/>
+   </flow>
+   <flow doc:name="get-list-books" name="get-list-books">
+      <snake:get-list-books config-ref="config"/>
+   </flow>
+   <flow doc:name="get-by-type" name="get-by-type">
+      <snake:get-by-type config-ref="config"
+                         entityData-ref="#[flowVars.entityData]"
+                         entityType="#[flowVars.entityType]"/>
+   </flow>
+</mule>

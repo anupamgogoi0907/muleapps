@@ -17,14 +17,14 @@ import org.mule.util.ClassUtils;
 import org.mule.util.TemplateParser;
 
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class TestMessageProcessorDebuggable
-    extends TestMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-23T12:14:08-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class GetByTypeMessageProcessorDebuggable
+    extends GetByTypeMessageProcessor
     implements DebugInfoProvider
 {
 
 
-    public TestMessageProcessorDebuggable(String operationName) {
+    public GetByTypeMessageProcessorDebuggable(String operationName) {
         super(operationName);
     }
 
@@ -61,7 +61,8 @@ public class TestMessageProcessorDebuggable
     @Override
     public List<FieldDebugInfo<?>> getDebugInfo(MuleEvent muleEvent) {
         List<FieldDebugInfo<?>> fieldDebugInfoList = new ArrayList<FieldDebugInfo<?>>();
-        fieldDebugInfoList.add(createDevKitFieldDebugInfo("bookTitle", "Book title", (java.lang.String.class), bookTitle, muleEvent));
+        fieldDebugInfoList.add(createDevKitFieldDebugInfo("entityData", "Entity data", (java.lang.Object.class), entityData, muleEvent));
+        fieldDebugInfoList.add(createDevKitFieldDebugInfo("entityType", "Entity type", (java.lang.String.class), entityType, muleEvent));
         return fieldDebugInfoList;
     }
 

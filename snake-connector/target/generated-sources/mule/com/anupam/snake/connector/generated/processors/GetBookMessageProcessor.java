@@ -33,18 +33,18 @@ import org.mule.security.oauth.callback.ProcessCallback;
 
 
 /**
- * GetPostsMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#getPosts()} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * GetBookMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#getBook()} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class GetPostsMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-23T12:14:08-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class GetBookMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
 {
 
 
-    public GetPostsMessageProcessor(String operationName) {
+    public GetBookMessageProcessor(String operationName) {
         super(operationName);
     }
 
@@ -105,7 +105,7 @@ public class GetPostsMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((SnakeConnector) object).getPosts();
+                    return ((SnakeConnector) object).getBook();
                 }
 
             }
@@ -124,15 +124,15 @@ public class GetPostsMessageProcessor
 
     @Override
     public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
-        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("posts_id", null);
+        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("book_id", null);
         metaDataKey.setCategory("DataSenseResolver");
-        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "getPosts"));
+        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "getBook"));
         Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
         if ((Result.Status.FAILURE).equals(genericMetaData.getStatus())) {
             return genericMetaData;
         }
         MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("posts_id", null);
+        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("book_id", null);
         keyForStudio.setCategory("DataSenseResolver");
         metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
         MetaDataModel wrappedMetaDataModel = metaDataPayload;
@@ -158,7 +158,7 @@ public class GetPostsMessageProcessor
                     return metadata;
                 }
                 if (metadata.get() == null) {
-                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at getPosts retrieving was successful but result is null");
+                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at getBook retrieving was successful but result is null");
                 }
                 return metadata;
             } catch (Exception e) {

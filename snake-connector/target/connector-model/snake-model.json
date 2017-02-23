@@ -9,7 +9,7 @@
         {
           "javaTypeName": "String",
           "fullQualifiedJavaTypeName": "java.lang.String",
-          "defaultValue": "Hello",
+          "defaultValue": "admin",
           "isOptional": true,
           "isRefOnly": false,
           "isPayload": false,
@@ -19,7 +19,7 @@
           "typeMirror": "java.lang.String",
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
-          "javaName": "blogURL"
+          "javaName": "username"
         }
       ],
       "javaName": "ConnectorConfig",
@@ -29,28 +29,6 @@
   ],
   "attributes": [],
   "processors": [
-    {
-      "isPaged": false,
-      "isBatch": false,
-      "samples": [],
-      "javaReturnType": {
-        "javaTypeName": "Object",
-        "fullQualifiedJavaTypeName": "java.lang.Object",
-        "isOptional": false,
-        "isRefOnly": false,
-        "isPayload": false,
-        "isComplexType": false,
-        "isEnum": false,
-        "isString": false,
-        "isHttpCallback": false,
-        "description": ""
-      },
-      "parameters": [],
-      "apiDocUrl": "",
-      "javaName": "getPosts",
-      "friendlyName": "Get posts",
-      "xsdName": "get-posts"
-    },
     {
       "isPaged": false,
       "isBatch": false,
@@ -81,7 +59,7 @@
           "isHttpCallback": false,
           "isArrayOrListOrMap": false,
           "metaDataKeyParam": "BOTH",
-          "javaName": "key"
+          "javaName": "entityType"
         },
         {
           "javaTypeName": "Object",
@@ -100,9 +78,9 @@
         }
       ],
       "apiDocUrl": "",
-      "javaName": "addEntity",
-      "friendlyName": "Add entity",
-      "xsdName": "add-entity"
+      "javaName": "getByType",
+      "friendlyName": "Get by type",
+      "xsdName": "get-by-type"
     },
     {
       "isPaged": false,
@@ -120,27 +98,33 @@
         "isHttpCallback": false,
         "description": ""
       },
-      "parameters": [
-        {
-          "javaTypeName": "String",
-          "fullQualifiedJavaTypeName": "java.lang.String",
-          "defaultValue": "#[payload]",
-          "isOptional": true,
-          "isRefOnly": false,
-          "isPayload": false,
-          "isComplexType": false,
-          "isEnum": false,
-          "isString": true,
-          "typeMirror": "java.lang.String",
-          "isHttpCallback": false,
-          "isArrayOrListOrMap": false,
-          "javaName": "bookTitle"
-        }
-      ],
+      "parameters": [],
       "apiDocUrl": "",
-      "javaName": "test",
-      "friendlyName": "Test",
-      "xsdName": "test"
+      "javaName": "getBook",
+      "friendlyName": "Get book",
+      "xsdName": "get-book"
+    },
+    {
+      "isPaged": false,
+      "isBatch": false,
+      "samples": [],
+      "javaReturnType": {
+        "javaTypeName": "Object",
+        "fullQualifiedJavaTypeName": "java.lang.Object",
+        "isOptional": false,
+        "isRefOnly": false,
+        "isPayload": false,
+        "isComplexType": false,
+        "isEnum": false,
+        "isString": false,
+        "isHttpCallback": false,
+        "description": ""
+      },
+      "parameters": [],
+      "apiDocUrl": "",
+      "javaName": "getListBooks",
+      "friendlyName": "Get list books",
+      "xsdName": "get-list-books"
     }
   ],
   "filters": [],

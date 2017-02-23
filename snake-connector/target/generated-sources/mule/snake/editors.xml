@@ -9,7 +9,7 @@
       </group>
       <group id="general" caption="General">
         <useMetaData name="useMetaData" caption="useMetaData"></useMetaData>
-        <string defaultValue="Hello" name="blogURL" caption="Blog U R L" description="The blog url.Please do not use the prefix http:// or https://. E.g gocodeblog.wordpress.com." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="admin" name="username" caption="Username" description="" supportsExpressions="false" required="false" javaType="java.lang.String"></string>
       </group>
     </attribute-category>
   </global-cloud-connector>
@@ -25,29 +25,25 @@
       <group id="snakeConnectorGeneric" caption="Basic Settings">
         <modeSwitch alwaysCombo="true" name="Snake operations to execute" caption="Operation" description="Operation.">
           <no-operation abstractElement="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
-          <mode modeId="http://www.mulesoft.org/schema/mule/snake/add-entity" modeLabel="Add entity"></mode>
-          <mode modeId="http://www.mulesoft.org/schema/mule/snake/get-posts" modeLabel="Get posts"></mode>
-          <mode modeId="http://www.mulesoft.org/schema/mule/snake/test" modeLabel="Test"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/get-book" modeLabel="Get book"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/get-by-type" modeLabel="Get by type"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/snake/get-list-books" modeLabel="Get list books"></mode>
         </modeSwitch>
       </group>
     </attribute-category>
   </cloud-connector>
-  <cloud-connector returnType="java.lang.Object" categories="DataSenseResolver" caption="Add Entity" icon="icons/theme.classic/snake-connector-small.png" localId="add-entity" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
+  <cloud-connector returnType="java.lang.Object" metaDataStaticKey="book_id" categories="DataSenseResolver" caption="Get Book" icon="icons/theme.classic/snake-connector-small.png" localId="get-book" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
+    <attribute-category caption="General" description="General."></attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.Object" categories="DataSenseResolver" caption="Get By Type" icon="icons/theme.classic/snake-connector-small.png" localId="get-by-type" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
     <attribute-category caption="General" description="General.">
       <group id="general" caption="General">
-        <type-chooser associatedConfig="config-ref" affects="BOTH" name="key" caption="Key" description="" supportsExpressions="true" required="true" javaType="java.lang.String"></type-chooser>
+        <type-chooser associatedConfig="config-ref" affects="BOTH" name="entityType" caption="Entity Type" description="" supportsExpressions="true" required="true" javaType="java.lang.String"></type-chooser>
         <string defaultValue="#[payload]" name="entityData-ref" caption="Entity Data Reference" description="" required="false" javaType="java.lang.Object"></string>
       </group>
     </attribute-category>
   </cloud-connector>
-  <cloud-connector returnType="java.lang.Object" metaDataStaticKey="posts_id" categories="DataSenseResolver" caption="Get Posts" icon="icons/theme.classic/snake-connector-small.png" localId="get-posts" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
+  <cloud-connector returnType="java.lang.Object" metaDataStaticKey="book_list_id" categories="DataSenseResolver" caption="Get List Books" icon="icons/theme.classic/snake-connector-small.png" localId="get-list-books" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
     <attribute-category caption="General" description="General."></attribute-category>
-  </cloud-connector>
-  <cloud-connector returnType="java.lang.Object" metaDataStaticKey="author_id" categories="DataSenseResolver" caption="Test" icon="icons/theme.classic/snake-connector-small.png" localId="test" image="icons/theme.classic/snake-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/snake/abstractSnakeConnectorGeneric" metaData="dynamic">
-    <attribute-category caption="General" description="General.">
-      <group id="general" caption="General">
-        <string defaultValue="#[payload]" name="bookTitle" caption="Book Title" description="" required="false" javaType="java.lang.String"></string>
-      </group>
-    </attribute-category>
   </cloud-connector>
 </namespace>

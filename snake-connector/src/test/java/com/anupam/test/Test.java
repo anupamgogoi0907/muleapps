@@ -3,10 +3,12 @@ package com.anupam.test;
 import java.util.List;
 
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.mule.common.Result;
 import org.mule.common.metadata.MetaData;
 import org.mule.common.metadata.MetaDataKey;
+import org.mule.common.metadata.datatype.DataType;
 import org.mule.tools.devkit.ctf.mockup.ConnectorDispatcher;
 import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
 
@@ -28,10 +30,16 @@ public class Test {
 		ConnectorDispatcher<SnakeConnector> dispatcher = getDispatcher();
 		Result<List<MetaDataKey>> keys = dispatcher.fetchMetaDataKeys();
 		List<MetaDataKey> listKeys = keys.get();
-
-		MetaDataKey key_posts = listKeys.get(2);
-		Result<MetaData> metaDataResult = dispatcher.fetchMetaData(key_posts);
-		System.out.print("");
+		
+		// Test MetaDataKey.
+		MetaDataKey key_book_list = listKeys.get(2);
+		Assert.assertTrue(key_book_list.getId().equals("book_list_id"));
+		
+		// Test MetaData.
+		Result<MetaData> metaDataResult = dispatcher.fetchMetaData(key_book_list);
+		MetaData metadata_book_list=metaDataResult.get();
+		
+		Assert.assertTrue(metadata_book_list.getPayload().getDataType().equals(DataType.LIST));
 	}
 
 	public ConnectorDispatcher<SnakeConnector> getDispatcher() {

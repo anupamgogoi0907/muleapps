@@ -17,14 +17,14 @@ import org.mule.util.ClassUtils;
 import org.mule.util.TemplateParser;
 
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class GetPostsMessageProcessorDebuggable
-    extends GetPostsMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-23T12:14:08-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class GetListBooksMessageProcessorDebuggable
+    extends GetListBooksMessageProcessor
     implements DebugInfoProvider
 {
 
 
-    public GetPostsMessageProcessorDebuggable(String operationName) {
+    public GetListBooksMessageProcessorDebuggable(String operationName) {
         super(operationName);
     }
 

@@ -16,7 +16,6 @@ import org.mule.common.DefaultResult;
 import org.mule.common.FailureType;
 import org.mule.common.Result;
 import org.mule.common.metadata.ConnectorMetaDataEnabled;
-import org.mule.common.metadata.DefaultMetaData;
 import org.mule.common.metadata.DefaultMetaDataKey;
 import org.mule.common.metadata.DefaultPojoMetaDataModel;
 import org.mule.common.metadata.DefaultSimpleMetaDataModel;
@@ -34,20 +33,22 @@ import org.mule.security.oauth.callback.ProcessCallback;
 
 
 /**
- * TestMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#test(java.lang.String)} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * GetByTypeMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#getByType(java.lang.String, java.lang.Object)} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class TestMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-23T12:14:08-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class GetByTypeMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
 {
 
-    protected Object bookTitle;
-    protected String _bookTitleType;
+    protected Object entityType;
+    protected String _entityTypeType;
+    protected Object entityData;
+    protected Object _entityDataType;
 
-    public TestMessageProcessor(String operationName) {
+    public GetByTypeMessageProcessor(String operationName) {
         super(operationName);
     }
 
@@ -81,12 +82,21 @@ public class TestMessageProcessor
     }
 
     /**
-     * Sets bookTitle
+     * Sets entityData
      * 
      * @param value Value to set
      */
-    public void setBookTitle(Object value) {
-        this.bookTitle = value;
+    public void setEntityData(Object value) {
+        this.entityData = value;
+    }
+
+    /**
+     * Sets entityType
+     * 
+     * @param value Value to set
+     */
+    public void setEntityType(Object value) {
+        this.entityType = value;
     }
 
     /**
@@ -101,7 +111,8 @@ public class TestMessageProcessor
         Object moduleObject = null;
         try {
             moduleObject = findOrCreate(null, false, event);
-            final String _transformedBookTitle = ((String) evaluateAndTransform(getMuleContext(), event, TestMessageProcessor.class.getDeclaredField("_bookTitleType").getGenericType(), null, bookTitle));
+            final String _transformedEntityType = ((String) evaluateAndTransform(getMuleContext(), event, GetByTypeMessageProcessor.class.getDeclaredField("_entityTypeType").getGenericType(), null, entityType));
+            final Object _transformedEntityData = ((Object) evaluateAndTransform(getMuleContext(), event, GetByTypeMessageProcessor.class.getDeclaredField("_entityDataType").getGenericType(), null, entityData));
             Object resultPayload;
             final ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
             resultPayload = processTemplate.execute(new ProcessCallback<Object,Object>() {
@@ -118,7 +129,7 @@ public class TestMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((SnakeConnector) object).test(_transformedBookTitle);
+                    return ((SnakeConnector) object).getByType(_transformedEntityType, _transformedEntityData);
                 }
 
             }
@@ -132,26 +143,40 @@ public class TestMessageProcessor
 
     @Override
     public Result<MetaData> getInputMetaData() {
-        MetaDataModel metaDataPayload = getPojoOrSimpleModel(String.class);
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("INPUT_METADATA", null);
-        keyForStudio.setCategory("DataSenseResolver");
-        metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
-        return new DefaultResult<MetaData>(new DefaultMetaData(metaDataPayload));
-    }
-
-    @Override
-    public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
-        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("author_id", null);
+        if (((entityType) == null)||((entityType).toString() == null)) {
+            return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error retrieving metadata from parameter: entityType at processor getByType at module SnakeConnector");
+        }
+        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey((entityType).toString(), null);
         metaDataKey.setCategory("DataSenseResolver");
-        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "test"));
+        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.INPUT, "getByType"));
         Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
         if ((Result.Status.FAILURE).equals(genericMetaData.getStatus())) {
             return genericMetaData;
         }
         MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("author_id", null);
+        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey((entityType).toString(), null);
         keyForStudio.setCategory("DataSenseResolver");
         metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
+        MetaDataModel wrappedMetaDataModel = metaDataPayload;
+        return new DefaultResult<MetaData>(MetaDataGeneratorUtils.extractPropertiesToMetaData(wrappedMetaDataModel, genericMetaData.get()));
+    }
+
+    @Override
+    public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
+        if (((entityType) == null)||((entityType).toString() == null)) {
+            return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error retrieving metadata from parameter: entityType at processor getByType at module SnakeConnector");
+        }
+        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey((entityType).toString(), null);
+        metaDataKey.setCategory("DataSenseResolver");
+        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "getByType"));
+        Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
+        if ((Result.Status.FAILURE).equals(genericMetaData.getStatus())) {
+            return genericMetaData;
+        }
+        MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
+        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey(((entityType).toString()+" Result"), null);
+        keyForStudio.setCategory("DataSenseResolver");
+        metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, true));
         MetaDataModel wrappedMetaDataModel = metaDataPayload;
         return new DefaultResult<MetaData>(MetaDataGeneratorUtils.extractPropertiesToMetaData(wrappedMetaDataModel, genericMetaData.get()));
     }
@@ -175,7 +200,7 @@ public class TestMessageProcessor
                     return metadata;
                 }
                 if (metadata.get() == null) {
-                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at test retrieving was successful but result is null");
+                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at getByType retrieving was successful but result is null");
                 }
                 return metadata;
             } catch (Exception e) {

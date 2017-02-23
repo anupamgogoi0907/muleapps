@@ -33,22 +33,18 @@ import org.mule.security.oauth.callback.ProcessCallback;
 
 
 /**
- * AddEntityMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#addEntity(java.lang.String, java.lang.Object)} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
+ * GetListBooksMessageProcessor invokes the {@link com.anupam.snake.connector.SnakeConnector#getListBooks()} method in {@link SnakeConnector }. For each argument there is a field in this processor to match it.  Before invoking the actual method the processor will evaluate and transform where possible to the expected argument type.
  * 
  */
 @SuppressWarnings("all")
-@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-21T06:08:34-03:00", comments = "Build UNNAMED.2793.f49b6c7")
-public class AddEntityMessageProcessor
+@Generated(value = "Mule DevKit Version 3.9.0", date = "2017-02-23T12:14:08-03:00", comments = "Build UNNAMED.2793.f49b6c7")
+public class GetListBooksMessageProcessor
     extends DevkitBasedMessageProcessor
     implements MessageProcessor, OperationMetaDataEnabled
 {
 
-    protected Object key;
-    protected String _keyType;
-    protected Object entityData;
-    protected Object _entityDataType;
 
-    public AddEntityMessageProcessor(String operationName) {
+    public GetListBooksMessageProcessor(String operationName) {
         super(operationName);
     }
 
@@ -82,24 +78,6 @@ public class AddEntityMessageProcessor
     }
 
     /**
-     * Sets entityData
-     * 
-     * @param value Value to set
-     */
-    public void setEntityData(Object value) {
-        this.entityData = value;
-    }
-
-    /**
-     * Sets key
-     * 
-     * @param value Value to set
-     */
-    public void setKey(Object value) {
-        this.key = value;
-    }
-
-    /**
      * Invokes the MessageProcessor.
      * 
      * @param event MuleEvent to be processed
@@ -111,8 +89,6 @@ public class AddEntityMessageProcessor
         Object moduleObject = null;
         try {
             moduleObject = findOrCreate(null, false, event);
-            final String _transformedKey = ((String) evaluateAndTransform(getMuleContext(), event, AddEntityMessageProcessor.class.getDeclaredField("_keyType").getGenericType(), null, key));
-            final Object _transformedEntityData = ((Object) evaluateAndTransform(getMuleContext(), event, AddEntityMessageProcessor.class.getDeclaredField("_entityDataType").getGenericType(), null, entityData));
             Object resultPayload;
             final ProcessTemplate<Object, Object> processTemplate = ((ProcessAdapter<Object> ) moduleObject).getProcessTemplate();
             resultPayload = processTemplate.execute(new ProcessCallback<Object,Object>() {
@@ -129,7 +105,7 @@ public class AddEntityMessageProcessor
                 public Object process(Object object)
                     throws Exception
                 {
-                    return ((SnakeConnector) object).addEntity(_transformedKey, _transformedEntityData);
+                    return ((SnakeConnector) object).getListBooks();
                 }
 
             }
@@ -143,40 +119,22 @@ public class AddEntityMessageProcessor
 
     @Override
     public Result<MetaData> getInputMetaData() {
-        if (((key) == null)||((key).toString() == null)) {
-            return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error retrieving metadata from parameter: key at processor addEntity at module SnakeConnector");
-        }
-        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey((key).toString(), null);
-        metaDataKey.setCategory("DataSenseResolver");
-        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.INPUT, "addEntity"));
-        Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
-        if ((Result.Status.FAILURE).equals(genericMetaData.getStatus())) {
-            return genericMetaData;
-        }
-        MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey((key).toString(), null);
-        keyForStudio.setCategory("DataSenseResolver");
-        metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
-        MetaDataModel wrappedMetaDataModel = metaDataPayload;
-        return new DefaultResult<MetaData>(MetaDataGeneratorUtils.extractPropertiesToMetaData(wrappedMetaDataModel, genericMetaData.get()));
+        return new DefaultResult<MetaData>(null, (Result.Status.SUCCESS));
     }
 
     @Override
     public Result<MetaData> getOutputMetaData(MetaData inputMetadata) {
-        if (((key) == null)||((key).toString() == null)) {
-            return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error retrieving metadata from parameter: key at processor addEntity at module SnakeConnector");
-        }
-        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey((key).toString(), null);
+        DefaultMetaDataKey metaDataKey = new DefaultMetaDataKey("book_list_id", null);
         metaDataKey.setCategory("DataSenseResolver");
-        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "addEntity"));
+        metaDataKey.addProperty(new TypeDescribingProperty(TypeDescribingProperty.TypeScope.OUTPUT, "getListBooks"));
         Result<MetaData> genericMetaData = getGenericMetaData(metaDataKey);
         if ((Result.Status.FAILURE).equals(genericMetaData.getStatus())) {
             return genericMetaData;
         }
         MetaDataModel metaDataPayload = genericMetaData.get().getPayload();
-        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey(((key).toString()+" Result"), null);
+        DefaultMetaDataKey keyForStudio = new DefaultMetaDataKey("book_list_id", null);
         keyForStudio.setCategory("DataSenseResolver");
-        metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, true));
+        metaDataPayload.addProperty(STUDIO7157 .getStructureIdentifierMetaDataModelProperty(keyForStudio, false, false));
         MetaDataModel wrappedMetaDataModel = metaDataPayload;
         return new DefaultResult<MetaData>(MetaDataGeneratorUtils.extractPropertiesToMetaData(wrappedMetaDataModel, genericMetaData.get()));
     }
@@ -200,7 +158,7 @@ public class AddEntityMessageProcessor
                     return metadata;
                 }
                 if (metadata.get() == null) {
-                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at addEntity retrieving was successful but result is null");
+                    return new DefaultResult<MetaData>(null, (Result.Status.FAILURE), "There was an error processing metadata at SnakeConnector at getListBooks retrieving was successful but result is null");
                 }
                 return metadata;
             } catch (Exception e) {
