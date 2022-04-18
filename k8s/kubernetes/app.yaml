@@ -15,6 +15,13 @@ spec:
       containers:
       - name: hello
         image: anupamgogoi/mule-hello-app:1.0.0
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "0.1Gi"
+          limits:
+            memory: "250Mi"
+            cpu: "0.1Gi"
         ports:
         - containerPort: 8081
 ---
