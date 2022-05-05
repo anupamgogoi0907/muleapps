@@ -14,6 +14,7 @@ https://blog.radwell.codes/2021/05/provisioning-single-node-kubernetes-cluster-u
 # TroubleShooting
 ### Taint: 
 ```
+kdesc nodes k8s | grep Taints
 kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
 ```
 ### Swap Off
