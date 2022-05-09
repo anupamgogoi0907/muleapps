@@ -17,10 +17,10 @@ spec:
         image: anupamgogoi/mule-hello-app:1.0.0
         resources:
           requests:
-            memory: "200Mi"
+            memory: "1G"
             cpu: "0.1"
           limits:
-            memory: "250Mi"
+            memory: "2G"
             cpu: "0.1"
         ports:
         - containerPort: 8081
