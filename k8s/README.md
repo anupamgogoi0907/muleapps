@@ -11,6 +11,9 @@ alias kexec="kubectl exec -it"
 ## Install Kubernetes in Ubuntu
 https://blog.radwell.codes/2021/05/provisioning-single-node-kubernetes-cluster-using-kubeadm-on-ubuntu-20-04/
 
+## Install Minishift in Ubuntu 20,04
+https://medium.com/@balashanmugam2016/how-to-install-openshift-minishift-in-ubuntu-20-04-using-virtualbox-as-hypervisor-6adbd0092563
+
 # TroubleShooting
 ### Taint: 
 ```

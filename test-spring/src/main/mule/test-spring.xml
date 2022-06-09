@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:sap="http://www.mulesoft.org/schema/mule/sap" xmlns:apikit-soap="http://www.mulesoft.org/schema/mule/apikit-soap"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:java="http://www.mulesoft.org/schema/mule/java" xmlns:spring="http://www.mulesoft.org/schema/mule/spring" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/spring http://www.mulesoft.org/schema/mule/spring/current/mule-spring.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/apikit-soap http://www.mulesoft.org/schema/mule/apikit-soap/current/mule-apikit-soap.xsd
+http://www.mulesoft.org/schema/mule/sap http://www.mulesoft.org/schema/mule/sap/current/mule-sap.xsd">
+	<http:listener-config name="listener_8081" doc:name="HTTP Listener config" doc:id="926c1fff-bbd1-4566-ae05-89205a150b7b" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<spring:config name="Spring_Config" doc:name="Spring Config" doc:id="1254b92e-be30-4bb6-9b9a-85dbddfae209" files="beans.xml" />
+	<flow name="testFlow1" doc:id="b44e0c0d-ceaf-4f43-8d12-d5aaebedaa6b" >
+		<http:listener doc:name="Listener" doc:id="5c5ac6ce-1187-43d3-946f-0e464a86af40" config-ref="listener_8081" path="/ctx"/>
+		<java:invoke doc:name="Invoke" doc:id="274b1b6d-e7e5-4a91-95a2-1c37b6f86fed" instance="mybean" class="com.anupam.MyBean" method="sayHello()"/>
+		<ee:transform doc:name="Transform Message" doc:id="b2ba7a32-ac31-436b-b094-c5b4af0005ff" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"message":upper("hello world")
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="cb4d3959-af74-4e4b-bfd4-61834b5a7e41" />
+	</flow>
+</mule>
