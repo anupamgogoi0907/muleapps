@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:java="http://www.mulesoft.org/schema/mule/java"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="75ba04c9-cf05-4f34-b599-d20518fb5ef5" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="ag-network-toolFlow" doc:id="cb7a5c9d-4099-4e16-ad1f-0fce2c51915e" >
+		<http:listener doc:name="Listener" doc:id="6ebbbb43-859d-4b1b-bb91-de1f1cf85781" config-ref="HTTP_Listener_config" path="/app"/>
+		<ee:transform doc:name="Transform Message" doc:id="2c30045e-bfcc-4d86-a1e7-f45df96a2e61" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/java
+---
+payload.cmd]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<java:invoke-static doc:name="buildCommand" doc:id="be98c99e-9514-4d23-9a24-6307ab6709be" class="com.anupam.Utility" method="buildCommand(java.lang.String)">
+			<java:args ><![CDATA[#[{command:payload}]
+			]]></java:args>
+		</java:invoke-static>
+		<ee:transform doc:name="Transform Message" doc:id="e2bd3ca3-6703-4b57-9254-824e4e96d8ba" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output text/plain
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="20c8d6d1-02ae-4935-bb3b-97e0c2c50498" />
+	</flow>
+</mule>
