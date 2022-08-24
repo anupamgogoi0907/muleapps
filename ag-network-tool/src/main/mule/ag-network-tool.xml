@@ -10,7 +10,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 		<http:listener-connection host="0.0.0.0" port="8081" />
 	</http:listener-config>
 	<flow name="ag-network-toolFlow" doc:id="cb7a5c9d-4099-4e16-ad1f-0fce2c51915e" >
-		<http:listener doc:name="Listener" doc:id="6ebbbb43-859d-4b1b-bb91-de1f1cf85781" config-ref="HTTP_Listener_config" path="/app"/>
+		<http:listener doc:name="Listener" doc:id="6ebbbb43-859d-4b1b-bb91-de1f1cf85781" config-ref="HTTP_Listener_config" path="/"/>
 		<ee:transform doc:name="Transform Message" doc:id="2c30045e-bfcc-4d86-a1e7-f45df96a2e61" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
@@ -31,6 +31,6 @@ output text/plain
 payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="20c8d6d1-02ae-4935-bb3b-97e0c2c50498" />
+		<logger level="INFO" doc:name="Logger" doc:id="20c8d6d1-02ae-4935-bb3b-97e0c2c50498" message="#[payload]"/>
 	</flow>
 </mule>
