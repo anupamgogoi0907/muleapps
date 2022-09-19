@@ -1,0 +1,60 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/api" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/app" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/net/minidev/accessors-smart/2.4.7/accessors-smart-2.4.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/adal4j/1.6.7/adal4j-1.6.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/retrofit2/adapter-rxjava/2.6.4/adapter-rxjava-2.6.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/9.1/asm-9.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/asynchttpclient/async-http-client/2.12.1/async-http-client-2.12.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/asynchttpclient/async-http-client-netty-utils/2.12.1/async-http-client-netty-utils-2.12.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/azure-annotations/1.10.0/azure-annotations-1.10.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/azure-client-authentication/1.7.14/azure-client-authentication-1.7.14.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/azure-client-runtime/1.7.14/azure-client-runtime-1.7.14.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/azure-servicebus/3.6.6/azure-servicebus-3.6.6.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/rest/client-runtime/1.7.14/client-runtime-1.7.14.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/nimbusds/content-type/2.1/content-type-2.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/retrofit2/converter-jackson/2.6.4/converter-jackson-2.6.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/20.0/guava-20.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.12.1/jackson-annotations-2.12.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.12.1/jackson-core-2.12.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.12.1/jackson-databind-2.12.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/fasterxml/jackson/datatype/jackson-datatype-joda/2.10.5/jackson-datatype-joda-2.10.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/sun/activation/javax.activation/1.2.0/javax.activation-1.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/joda-time/joda-time/2.9.9/joda-time-2.9.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/minidev/json-smart/2.4.7/json-smart-2.4.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/nimbusds/lang-tag/1.5/lang-tag-1.5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okhttp3/logging-interceptor/3.12.12/logging-interceptor-3.12.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/msal4j/1.11.0/msal4j-1.11.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-buffer/4.1.48.Final/netty-buffer-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-codec/4.1.48.Final/netty-codec-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-codec-http/4.1.48.Final/netty-codec-http-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-codec-socks/4.1.48.Final/netty-codec-socks-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-common/4.1.48.Final/netty-common-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-handler/4.1.48.Final/netty-handler-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-handler-proxy/4.1.48.Final/netty-handler-proxy-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/typesafe/netty/netty-reactive-streams/2.0.4/netty-reactive-streams-2.0.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-resolver/4.1.48.Final/netty-resolver-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-transport/4.1.48.Final/netty-transport-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-transport-native-epoll/4.1.48.Final/netty-transport-native-epoll-4.1.48.Final-linux-x86_64.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-transport-native-kqueue/4.1.48.Final/netty-transport-native-kqueue-4.1.48.Final-osx-x86_64.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/netty/netty-transport-native-unix-common/4.1.48.Final/netty-transport-native-unix-common-4.1.48.Final.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/nimbusds/nimbus-jose-jwt/9.9.3/nimbus-jose-jwt-9.9.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/nimbusds/oauth2-oidc-sdk/9.7/oauth2-oidc-sdk-9.7.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okhttp3/okhttp/3.12.12/okhttp-3.12.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okhttp3/okhttp-urlconnection/3.12.12/okhttp-urlconnection-3.12.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okio/okio/1.15.0/okio-1.15.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/qpid/proton-j/0.33.8/proton-j-0.33.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/microsoft/azure/qpid-proton-j-extensions/1.2.4/qpid-proton-j-extensions-1.2.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/retrofit2/retrofit/2.6.4/retrofit-2.6.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/io/reactivex/rxjava/1.3.8/rxjava-1.3.8.jar"/>
+  <classpathentry kind="con" path="MULE_RUNTIME"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>
