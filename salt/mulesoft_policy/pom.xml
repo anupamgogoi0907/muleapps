@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>{OrgId}</groupId>
+	<artifactId>salt-mirroring-policy</artifactId>
+	<version>2.0.19</version>
+	<name>Salt Mirroring Policy</name>
+	<description>Salt Security Mulesoft mirroring Integration. Copyright (C) 2022 Salt Security Inc.</description>
+	<packaging>mule-policy</packaging>
+	<properties>
+		<mule.maven.plugin.version>3.6.3</mule.maven.plugin.version>
+		<exchange.url>https://maven.anypoint.mulesoft.com/api/v1/organizations/{OrgId}/maven</exchange.url>
+	</properties>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.mule.tools.maven</groupId>
+				<artifactId>mule-maven-plugin</artifactId>
+				<version>${mule.maven.plugin.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>upload-template</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy-file</goal>
+						</goals>
+						<configuration>
+							<repositoryId>exchange-server</repositoryId>
+							<url>${exchange.url}</url>
+							<file>${project.basedir}/${project.artifactId}.yaml</file>
+							<generatePom>false</generatePom>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+							<packaging>yaml</packaging>
+							<classifier>policy-definition</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>exchange-server</id>
+			<name>Corporate Repository</name>
+			<url>${exchange.url}</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>Repository</id>
+			<name>Corporate Repository</name>
+			<url>${exchange.url}</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>anypoint-exchange-v3</id>
+			<name>Anypoint Exchange V3</name>
+			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mule-plugin</id>
+			<name>Mule Repository</name>
+			<url>https://repository.mulesoft.org/nexus/content/repositories/public/</url>
+		</pluginRepository>
+
+	</pluginRepositories>
+</project>

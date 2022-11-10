@@ -1,0 +1,59 @@
+id: saltMirroringPolicy
+name: Salt Mirroring Policy
+description: Salt Security Mulesoft mirroring Integration v2.0.19. Copyright (C) 2022 Salt Security Inc.
+category: Custom
+type: custom
+resourceLevelSupported: true
+encryptionSupported: false
+standalone: true
+requiredCharacteristics: []
+providedCharacteristics: []
+configuration:
+  - propertyName: defaultTargetHost
+    name: Target Host and Port
+    description: The address of the Salt Mirroring API host in the format <address>:<port>
+    type: string
+    optional: false
+    defaultValue: "traffic-receiver-http.dnssf.com"
+    sensitive: false
+    allowMultiple: false
+  - propertyName: saltAuthToken
+    name: Authorization Token
+    description: Basic Authorization token
+    type: string
+    optional: false
+    defaultValue: "Basic <Base64 token>"
+    sensitive: false
+    allowMultiple: false
+  - propertyName: saltResponseTimeout
+    name: Salt Server Response Timeout
+    description: Maximum time of waiting for Salt HTTP response (milliseconds).
+    type: string
+    optional: false
+    defaultValue: "500"
+    sensitive: false
+    allowMultiple: false
+  - propertyName: excludedSubnetRegex
+    name: Regex of Excluded Hostname
+    description: The regex of the hostnames that are excluded from the default target host, for which mirroring will be done to an alternative host
+    type: string
+    optional: true
+    defaultValue: 
+    sensitive: false
+    allowMultiple: false
+  - propertyName: alternativeTargetHost
+    name: Alternative Target Host
+    description: The address of the alternate Salt Mirroring API host to which traffic from the excluded addresses will be mirrored
+    type: string
+    optional: true
+    defaultValue: 
+    sensitive: false
+    allowMultiple: false
+  - propertyName: trustTargetCertificate
+    name: Trust Target Host Certificate
+    description: Configure TLS to trust self-signed certificates on the target host when mirroring requests
+    type: boolean
+    optional: false
+    defaultValue: true
+    sensitive: false
+    allowMultiple: false

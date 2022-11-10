@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	  xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xmlns:http-policy="http://www.mulesoft.org/schema/mule/http-policy"
+	  xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	  xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	  xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http 
+	  http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+	  http://www.mulesoft.org/schema/mule/core 
+	  http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+	  http://www.mulesoft.org/schema/mule/tls 
+	  http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+	  http://www.mulesoft.org/schema/mule/http-policy
+	  http://www.mulesoft.org/schema/mule/http-policy/current/mule-http-policy.xsd">
+
+	<!--
+		Salt Security Mulesoft mirroring Integration v2.0.19.
+		Copyright (C) 2022 Salt Security Inc.
+	-->
+
+	<tls:context name="TLS_Insecure_config" >
+		<tls:trust-store insecure="true" />
+	</tls:context>
+
+	<http:request-config name="HTTP_Insecure_Request_configuration" doc:name="HTTP Insecure Request configuration" >
+		<http:request-connection protocol="HTTPS" tlsContext="TLS_Insecure_config" />
+	</http:request-config>
+
+	<http:request-config name="HTTP_Secure_Request_configuration" doc:name="HTTP Secure Request configuration" >
+		<http:request-connection protocol="HTTPS" />
+	</http:request-config>
+
+	<http-policy:proxy name="{{{policyId}}}-custom-policy">
+		<http-policy:source propagateMessageTransformations="false">
+			<try>
+				<logger level="DEBUG" message="#['Starting Salt Mirroring Policy']" />
+
+				<!-- TARGET HOST -->
+				<set-variable variableName="defaultTargetHost" value="{{{defaultTargetHost}}}" doc:name="Set Variable" />
+				<set-variable variableName="alternativeTargetHost" value="{{{alternativeTargetHost}}}" doc:name="Set Variable" />
+				<set-variable variableName="excludedSubnetRegex" value="{{{excludedSubnetRegex}}}" doc:name="Set Variable" />
+
+				<logger level="DEBUG" message="#['Server Host Name: = $(write(server.host))']" />
+				<logger level="DEBUG" message="#['Excluded Subnet Regex: = $(write(vars.excludedSubnetRegex))']" />
+
+				<set-variable variableName="targetHost" doc:name="Set Variable" value='#[%dw 2.0
+output application/java
+---
+if (!isEmpty(vars.excludedSubnetRegex) and matches(server.host, vars.excludedSubnetRegex))
+	vars.alternativeTargetHost
+else
+	vars.defaultTargetHost
+]'/>
+				<logger level="DEBUG" message="#['Mirroring target host = $(write(vars.targetHost))']" />
+
+				<set-variable variableName="exchangeUrl" doc:name="Set Variable" value='#[%dw 2.0
+output application/java
+---
+"https://" ++ vars.targetHost as String ++ "/api/v1/http/exchange"
+]'/>
+
+				<logger level="DEBUG" message="#['Exchange URL = $(write(vars.exchangeUrl))']" />
+
+				<!-- HEADERS -->
+				<set-variable variableName="authToken" value="{{{saltAuthToken}}}" doc:name="Set Variable" />
+				<set-variable variableName="headersJson" doc:name="Set Variable" value='#[%dw 2.0
+output application/java
+---
+{
+	"Content-Type" : "application/json",
+	"Authorization" : vars.authToken
+}
+]' />
+
+				<!-- REQUEST -->
+				<set-variable variableName="callerIP" value="#[message.attributes.headers.'x-real-ip']" doc:name="Set Variable" />
+
+				<set-variable variableName="requestPayload" doc:name="Set Variable" value='#[%dw 2.0
+output application/java
+---
+if (isEmpty(payload.^raw))
+	""
+else
+	payload.^raw as String
+]' />
+				<logger level="DEBUG" message="#['Request Payload = $(write(vars.requestPayload))']" />
+
+				<set-variable variableName="requestJson" doc:name="Set Variable" value='#[%dw 2.0
+import * from dw::core::URL
+import * from dw::core::Binaries
+import dw::Crypto
+
+output application/java
+---
+{
+	"timestamp" : now(),
+	"requestId" : uuid(),
+	"originalClientIp" : vars.callerIP default "",
+	"method" : message.attributes.method,
+	"uri" : encodeURI(message.attributes.requestPath),
+	"httpVersion" : message.attributes.version,
+	"headers" : message.attributes.headers pluck toBase64("$$:$"),
+	"body" : toBase64(vars.requestPayload)
+}
+
+]'/>
+				<logger level="DEBUG" message="#['Mirroring request: $(write(vars.requestJson))']" />
+				
+				<http-policy:execute-next />
+
+				<!-- RESPONSE -->
+				<set-variable variableName="responsePayload" doc:name="Set Variable" value='#[%dw 2.0
+output application/java
+---
+if (isEmpty(payload.^raw))
+	""
+else
+	payload.^raw as String
+]' />
+				<logger level="DEBUG" message="#['Response Payload: = $(write(vars.responsePayload))']" />
+
+				<set-variable variableName="responseJson" doc:name="Set Variable" value='#[%dw 2.0
+import dw::Crypto
+import toBase64 from dw::core::Binaries
+
+output application/java
+---
+{
+	"timestamp" : now(),
+	"requestId" : vars.requestJson.requestId,
+	"httpVersion" : vars.requestJson.httpVersion,
+	"statusCode" : message.attributes.statusCode as String,
+	"headers" : message.attributes.headers pluck toBase64("$$:$"),
+	"body" : toBase64(vars.responsePayload)
+}]' />
+
+				<logger level="DEBUG" message="#['Mirroring response: $(write(vars.responseJson))']" />
+
+				<set-variable variableName="exchangeJson" doc:name="Set Variable" doc:id="99889e3b-5fa7-4492-80f6-3d72d39bdls9" value='#[%dw 2.0
+output text/json indent=false
+---
+{
+	"request" : vars.requestJson,
+	"response" : vars.responseJson
+}
+]'/>
+
+				<logger level="DEBUG" message="#['Exchange Payload: = $(write(vars.exchangeJson))']" />
+
+				<!-- Use insecure or secure TLS configuration -->
+				<set-variable variableName="trustTargetCertificate" value="{{{trustTargetCertificate}}}" doc:name="Set Variable" />
+
+				<async doc:name="Async" >
+					<try doc:name="Try" >
+						<choice doc:name="TLS Insecure choice">
+							<when expression="#[vars.trustTargetCertificate]">
+								<http:request method="POST" doc:name="Request" config-ref="HTTP_Insecure_Request_configuration"
+										url="#[vars.exchangeUrl]" target="res" outputMimeType="text/plain" responseTimeout="#[vars.saltResponseTimeout]"
+										requestStreamingMode="NEVER">
+									<http:body><![CDATA[#[vars.exchangeJson]]]></http:body>
+									<http:headers><![CDATA[#[vars.headersJson]]]></http:headers>
+								</http:request>
+							</when>
+							<otherwise>
+								<http:request method="POST" doc:name="Request" config-ref="HTTP_Secure_Request_configuration"
+										url="#[vars.exchangeUrl]" target="res" outputMimeType="text/plain" responseTimeout="#[vars.saltResponseTimeout]"
+										requestStreamingMode="NEVER">
+									<http:body><![CDATA[#[vars.exchangeJson]]]></http:body>
+									<http:headers><![CDATA[#[vars.headersJson]]]></http:headers>
+								</http:request>
+							</otherwise>
+						</choice>
+						<error-handler >
+							<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" type="ANY">
+								<logger level="ERROR" message="Failed to mirror exchange to Salt server" />
+							</on-error-continue>
+						</error-handler>
+					</try>
+				</async>
+			</try>
+		</http-policy:source>
+	</http-policy:proxy>
+</mule>
