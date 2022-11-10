@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration status="INFO" name="cloudhub">
+	<Appenders>
+		<RollingFile name="file"
+			fileName="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}ag-test-api.log"
+			filePattern="${sys:mule.home}${sys:file.separator}logs${sys:file.separator}ag-test-api-%i.log">
+			<PatternLayout
+				pattern="%-5p %d [%t] [processor: %X{processorPath}; event: %X{correlationId}] %c: %m%n" />
+			<SizeBasedTriggeringPolicy size="10 MB" />
+			<DefaultRolloverStrategy max="10" />
+		</RollingFile>
+
+		<Http name="splunk"
+			url="https://SplunkServerDefaultCert:8088/services/collector/raw">
+			<Property name="Authorization"
+				value="Splunk 46130d26-0351-40d2-9a5a-870a3b177332"></Property>
+			<PatternLayout pattern="%m%n"></PatternLayout>
+			<SSL>
+				<TrustStore location="truststore.jks"
+					password="123456" />
+			</SSL>
+		</Http>
+	</Appenders>
+
+	<Loggers>
+
+		<AsyncLogger name="org.mule.service.http" level="WARN" />
+		<AsyncLogger name="org.mule.extension.http" level="WARN" />
+		<AsyncLogger
+			name="org.mule.runtime.core.internal.processor.LoggerMessageProcessor"
+			level="INFO" />
+
+		<AsyncRoot level="INFO">
+			<AppenderRef ref="file" />
+			<AppenderRef ref="splunk" />
+		</AsyncRoot>
+
+	</Loggers>
+
+</Configuration>
