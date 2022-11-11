@@ -13,7 +13,7 @@
 		<Http name="splunk"
 			url="https://SplunkServerDefaultCert:8088/services/collector/raw">
 			<Property name="Authorization"
-				value="Splunk 46130d26-0351-40d2-9a5a-870a3b177332"></Property>
+				value="Splunk 265490c5-e0df-4d56-9936-3c5903e1f04b"></Property>
 			<PatternLayout pattern="%m%n"></PatternLayout>
 			<SSL>
 				<TrustStore location="truststore.jks"
