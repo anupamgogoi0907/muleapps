@@ -14,7 +14,7 @@ services:
     container_name: kb-container
     image: docker.elastic.co/kibana/kibana:8.5.0
     environment:
-      - ELASTICSEARCH_HOSTS=http://localhost:9200
+      - ELASTICSEARCH_HOSTS=http://es-container:9200
     networks:
       - es-net
     depends_on:
