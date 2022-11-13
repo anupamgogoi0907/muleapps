@@ -10,11 +10,15 @@
 			<DefaultRolloverStrategy max="10" />
 		</RollingFile>
 
-		<Http name="elk" url="http://localhost:9200/customer/_doc">
-			<JsonLayout compact="true" eventEol="true"
-				properties="true" />
-			<Property name="kbn-xsrf" value="true" />
-			<Property name="Content-Type" value="application/json" />
+		<Http name="splunk"
+			url="https://SplunkServerDefaultCert:8088/services/collector/raw">
+			<Property name="Authorization"
+				value="Splunk 265490c5-e0df-4d56-9936-3c5903e1f04b"></Property>
+			<PatternLayout pattern="%m%n"></PatternLayout>
+			<SSL>
+				<TrustStore location="truststore.jks"
+					password="123456" />
+			</SSL>
 		</Http>
 	</Appenders>
 
@@ -28,7 +32,7 @@
 
 		<AsyncRoot level="INFO">
 			<AppenderRef ref="file" />
-			<AppenderRef ref="elk" />
+			<AppenderRef ref="splunk" />
 		</AsyncRoot>
 
 	</Loggers>
