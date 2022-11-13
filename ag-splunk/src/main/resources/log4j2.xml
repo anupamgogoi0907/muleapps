@@ -10,10 +10,9 @@
 			<DefaultRolloverStrategy max="10" />
 		</RollingFile>
 
-		<Http name="elk" url="http://localhost:9200/customer/_doc">
+		<Http name="elk" url="http://localhost:9200/mule/_doc">
 			<JsonLayout compact="true" eventEol="true"
 				properties="true" />
-			<Property name="kbn-xsrf" value="true" />
 			<Property name="Content-Type" value="application/json" />
 		</Http>
 	</Appenders>
