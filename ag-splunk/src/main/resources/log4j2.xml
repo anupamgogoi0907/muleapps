@@ -10,7 +10,7 @@
 			<DefaultRolloverStrategy max="10" />
 		</RollingFile>
 
-		<Http name="elk" url="http://localhost:9200/mule/_doc">
+		<Http name="elk" url="http://localhost:9200/mule-app-ag-mock/_doc">
 			<JsonLayout compact="true" eventEol="true"
 				properties="true" />
 			<Property name="Content-Type" value="application/json" />
