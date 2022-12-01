@@ -6,11 +6,7 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
 http://www.mulesoft.org/schema/mule/java http://www.mulesoft.org/schema/mule/java/current/mule-java.xsd
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="75ba04c9-cf05-4f34-b599-d20518fb5ef5" >
-		<http:listener-connection host="0.0.0.0" port="8081" />
-	</http:listener-config>
-	<flow name="ag-network-toolFlow" doc:id="cb7a5c9d-4099-4e16-ad1f-0fce2c51915e" >
-		<http:listener doc:name="Listener" doc:id="6ebbbb43-859d-4b1b-bb91-de1f1cf85781" config-ref="HTTP_Listener_config" path="/"/>
+	<flow name="ag-network-toolSubFlow" doc:id="cb7a5c9d-4099-4e16-ad1f-0fce2c51915e" >
 		<ee:transform doc:name="Transform Message" doc:id="2c30045e-bfcc-4d86-a1e7-f45df96a2e61" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
