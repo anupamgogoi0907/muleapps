@@ -1,2 +1,5 @@
 server:
   port: "8091"
+app:
+  username: "admin"
+  password: "adm!n"
