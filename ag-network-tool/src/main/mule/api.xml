@@ -13,6 +13,7 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
+		<validation:is-not-null doc:name="Authorization" doc:id="53af081b-8b34-4c42-a53a-661d381351be" value="#[attributes.headers.Authorization]" message="Missing Authorization header"/>
 		<ee:transform doc:name="Transform Message" doc:id="98d7527f-f24e-48a5-83a3-4cb30d1258f4" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
