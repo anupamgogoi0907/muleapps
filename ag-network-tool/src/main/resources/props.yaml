@@ -2,4 +2,4 @@ server:
   port: "8091"
 app:
   username: "admin"
-  password: "V!v0t001"
+  password: "**********"
