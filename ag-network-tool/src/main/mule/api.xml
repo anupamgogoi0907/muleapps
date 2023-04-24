@@ -3,6 +3,7 @@
 http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mule/validation/current/mule-validation.xsd">
     <apikit:config name="api-config" api="api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     
+	<global-property doc:name="Global Property" doc:id="31df05ad-27c0-475b-bf1c-a68f0c3a454c" name="auth" value="false" />
 	<flow name="api-main">
         <http:listener path="/*" config-ref="HTTP_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
@@ -13,16 +14,15 @@ http://www.mulesoft.org/schema/mule/validation http://www.mulesoft.org/schema/mu
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-		<validation:is-not-null doc:name="Authorization" doc:id="53af081b-8b34-4c42-a53a-661d381351be" value="#[attributes.headers.Authorization]" message="Missing Authorization header"/>
-		<ee:transform doc:name="Transform Message" doc:id="98d7527f-f24e-48a5-83a3-4cb30d1258f4" >
-			<ee:message >
-				<ee:set-payload ><![CDATA[%dw 2.0
-output application/json
----
-payload]]></ee:set-payload>
+		<set-variable value="${auth}" doc:name="auth" doc:id="fc10399b-875f-49c7-baa1-651861f8278f" variableName="auth"/>
+		<choice doc:name="Choice" doc:id="aee9534e-061c-4a67-8529-e4d7888718cd" >
+			<when expression="#[vars.auth]">
+				<validation:is-not-null doc:name="Authorization" doc:id="53af081b-8b34-4c42-a53a-661d381351be" value="#[attributes.headers.Authorization]" message="Missing Authorization header" />
+				<ee:transform doc:name="Transform Message" doc:id="98d7527f-f24e-48a5-83a3-4cb30d1258f4">
+			<ee:message>
 			</ee:message>
-			<ee:variables >
-				<ee:set-variable variableName="isAuthenticated" ><![CDATA[%dw 2.0
+			<ee:variables>
+				<ee:set-variable variableName="isAuthenticated"><![CDATA[%dw 2.0
 import * from dw::core::Binaries
 
 var username= Mule::p('app.username')
@@ -41,7 +41,9 @@ decodeHeader(attributes.headers.Authorization default "")
 ]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<validation:is-true doc:name="Is true" doc:id="995e0678-b7e7-4eca-89a3-f70b1a110734" expression="#[vars.isAuthenticated]" message="User authentication failed"/>
+				<validation:is-true doc:name="Is true" doc:id="995e0678-b7e7-4eca-89a3-f70b1a110734" expression="#[vars.isAuthenticated]" message="User authentication failed" />
+			</when>
+		</choice>
 		<apikit:router config-ref="api-config" />
 		<error-handler >
 			<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="ad93ab74-8f5f-4046-afd2-b642b56f8cb5" >
