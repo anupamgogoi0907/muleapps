@@ -9,4 +9,5 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="2071d93a-0ec4-45d7-b1da-f42cec826fa4" >
 		<http:listener-connection host="0.0.0.0" port="${server.port}" />
 	</http:listener-config>
+	<global-property doc:name="Global Property" doc:id="efad2036-3ee4-4212-889e-16bbc67ce911" name="auth" value="false" />
 </mule>
